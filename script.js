@@ -1,170 +1,274 @@
-// AI API integration and response generation
-const api = {
-    // Generate AI response based on user message
-    generateAIResponse(userMessage) {
-        const lowerMessage = userMessage.toLowerCase();
-        
-        // Knowledge assessment based on keywords
-        const knowledgeKeywords = {
-            phishing: ['phish', 'email', 'scam', 'fake', 'link', 'spoof'],
-            passwords: ['password', 'login', 'credential', 'authentication', '2fa', 'mfa'],
-            malware: ['malware', 'virus', 'ransomware', 'trojan', 'infection', 'antivirus'],
-            social: ['social engineering', 'manipulation', 'trust', 'impersonate', 'pretexting']
-        };
-        
-        // Check for knowledge areas mentioned
-        const mentionedAreas = [];
-        for (const [area, keywords] of Object.entries(knowledgeKeywords)) {
-            if (keywords.some(keyword => lowerMessage.includes(keyword))) {
-                mentionedAreas.push(area);
-            }
+// Simple Bible verses database
+const bibleVerses = {
+    morning: [
+        {
+            text: "The steadfast love of the LORD never ceases; his mercies never come to an end; they are new every morning; great is your faithfulness.",
+            reference: "Lamentations 3:22-23",
+            translation: "ESV"
+        },
+        {
+            text: "This is the day that the LORD has made; let us rejoice and be glad in it.",
+            reference: "Psalm 118:24",
+            translation: "ESV"
         }
-        
-        // Update user profile based on mentioned areas
-        if (mentionedAreas.length > 0) {
-            state.appState.userProfile.interests = [
-                ...new Set([...state.appState.userProfile.interests, ...mentionedAreas])
-            ];
-            
-            // If user demonstrates advanced knowledge, update level
-            if (state.appState.userProfile.knowledgeLevel === 'beginner' && 
-                (lowerMessage.includes('advanced') || lowerMessage.includes('expert') || 
-                 lowerMessage.includes('encryption') || lowerMessage.includes('firewall') ||
-                 lowerMessage.includes('vpn') || lowerMessage.includes('zero-day'))) {
-                state.appState.userProfile.knowledgeLevel = 'intermediate';
-                state.updateUserProfile({ knowledgeLevel: 'intermediate' });
-            }
+    ],
+    afternoon: [
+        {
+            text: "And let us not grow weary of doing good, for in due season we will reap, if we do not give up.",
+            reference: "Galatians 6:9",
+            translation: "ESV"
         }
-
-        // Get current time-based greeting
-        const currentGreeting = ui.getTimeBasedGreeting();
-        
-        // Generate personalized response
-        let response = '';
-        
-        // Greeting responses
-        if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
-            response = `${currentGreeting}! I'm your DefendIQ assistant. I see you're interested in ${mentionedAreas.length > 0 ? mentionedAreas.join(' and ') : 'cybersecurity'}. How can I help you today?`;
+    ],
+    evening: [
+        {
+            text: "In peace I will both lie down and sleep; for you alone, O LORD, make me dwell in safety.",
+            reference: "Psalm 4:8",
+            translation: "ESV"
         }
-        // Question about specific topics
-        else if (lowerMessage.includes('what') || lowerMessage.includes('how') || lowerMessage.includes('explain')) {
-            if (lowerMessage.includes('phishing')) {
-                response = "Phishing is a cyber attack that uses disguised emails to trick recipients into revealing sensitive information. Attackers often impersonate legitimate organizations and create a sense of urgency. Would you like to learn more about how to identify phishing attempts?";
-            } else if (lowerMessage.includes('password')) {
-                response = "Strong passwords should be at least 12 characters long and include a mix of uppercase letters, lowercase letters, numbers, and symbols. Using a password manager can help create and store secure passwords. Two-factor authentication adds an extra layer of security. Would you like me to recommend the 'Password Security' module?";
-            } else if (lowerMessage.includes('malware')) {
-                response = "Malware is malicious software designed to harm or exploit devices. Common types include viruses, worms, trojans, and ransomware. Keeping software updated, using antivirus protection, and avoiding suspicious downloads are key prevention methods.";
-            } else if (lowerMessage.includes('social engineering')) {
-                response = "Social engineering manipulates people into revealing confidential information. Attackers exploit human psychology rather than technical vulnerabilities. Common techniques include pretexting, baiting, and tailgating.";
-            } else {
-                response = "That's a great question about cybersecurity. Based on your interest, I'd recommend checking out our ";
-                
-                if (mentionedAreas.length > 0) {
-                    response += `${mentionedAreas[0]} module`;
-                } else {
-                    response += "Phishing Awareness module to start with the basics";
-                }
-                
-                response += ". Would you like me to tell you more about it?";
-            }
+    ],
+    night: [
+        {
+            text: "When I remember you upon my bed, and meditate on you in the watches of the night.",
+            reference: "Psalm 63:6",
+            translation: "ESV"
         }
-        // Request for help or recommendations
-        else if (lowerMessage.includes('help') || lowerMessage.includes('recommend') || lowerMessage.includes('suggest')) {
-            response = this.generateModuleRecommendation();
-        }
-        // Time-specific responses
-        else if (lowerMessage.includes('morning') || lowerMessage.includes('today')) {
-            const hour = new Date().getHours();
-            if (hour >= 5 && hour < 12) {
-                response = "Good morning! It's a perfect time to start with some cybersecurity basics. How about beginning with our Phishing Awareness module to kickstart your secure day?";
-            } else if (hour >= 12 && hour < 14) {
-                response = "Good day! Hope you're having a productive day. This is a great time for a quick cybersecurity refresher. What aspect would you like to focus on?";
-            } else if (hour >= 14 && hour < 18) {
-                response = "Good afternoon! As the day progresses, it's important to stay vigilant about online security. Would you like to learn about protecting against afternoon phishing attempts?";
-            } else if (hour >= 18 && hour < 22) {
-                response = "Good evening! Evening is a good time to reflect on your digital safety practices from today. What security topics are on your mind?";
-            } else {
-                response = "Good night! Even late hours require cybersecurity awareness, especially if you're browsing or working. Would you like some tips for safe nighttime computing?";
-            }
-        }
-        // Feeling or emotional support
-        else if (lowerMessage.includes('overwhelmed') || lowerMessage.includes('stress') || lowerMessage.includes('anxious')) {
-            response = `${currentGreeting}! I understand that cybersecurity can feel overwhelming with all the threats out there. Remember that every small step you take makes you more secure. Start with the basics and build your knowledge gradually. You're doing great by taking the initiative to learn!`;
-        }
-        // Default response
-        else {
-            response = `${currentGreeting}! Thanks for sharing that. `;
-            
-            if (mentionedAreas.length > 0) {
-                response += `Based on your interest in ${mentionedAreas.join(' and ')}, `;
-            }
-            
-            response += "I'd recommend focusing on our ";
-            
-            if (state.appState.userProfile.knowledgeLevel === 'beginner') {
-                response += "Phishing Awareness module to build a strong foundation. ";
-            } else {
-                response += "Social Engineering module to understand more advanced attack vectors. ";
-            }
-            
-            response += "Would you like to explore that module now?";
-        }
-        
-        return response;
-    },
-
-    // Generate module recommendation based on user profile
-    generateModuleRecommendation() {
-        const { knowledgeLevel, interests } = state.appState.userProfile;
-        const { modules } = state.appState.trainingProgress;
-        
-        // Find modules not completed
-        const availableModules = Object.entries(modules)
-            .filter(([_, module]) => !module.completed)
-            .map(([id, _]) => id);
-        
-        // If user has specific interests, prioritize those
-        if (interests.length > 0) {
-            const interestModules = availableModules.filter(module => 
-                interests.includes(module)
-            );
-            
-            if (interestModules.length > 0) {
-                const moduleTitles = {
-                    phishing: 'Phishing Awareness',
-                    passwords: 'Password Security',
-                    malware: 'Malware Protection',
-                    social: 'Social Engineering'
-                };
-                
-                return `${ui.getTimeBasedGreeting()}! Based on your interests, I recommend the "${moduleTitles[interestModules[0]]}" module. It covers essential concepts that align with what you've been asking about. Would you like to start that module now?`;
-            }
-        }
-        
-        // Otherwise, recommend based on knowledge level
-        let recommendedModule = '';
-        
-        if (knowledgeLevel === 'beginner') {
-            recommendedModule = 'phishing';
-        } else if (knowledgeLevel === 'intermediate') {
-            recommendedModule = 'passwords';
-        } else {
-            recommendedModule = 'social';
-        }
-        
-        // If recommended module is completed, find next available
-        if (modules[recommendedModule]?.completed) {
-            const nextModule = availableModules[0];
-            if (nextModule) recommendedModule = nextModule;
-        }
-        
-        const moduleTitles = {
-            phishing: 'Phishing Awareness',
-            passwords: 'Password Security',
-            malware: 'Malware Protection',
-            social: 'Social Engineering'
-        };
-        
-        return `${ui.getTimeBasedGreeting()}! Based on your current knowledge level, I recommend the "${moduleTitles[recommendedModule]}" module. It's designed to build on what you already know and introduce new concepts. Would you like to explore it?`;
-    }
+    ]
 };
+
+// Initialize variables
+let currentVerse = null;
+let customVerses = JSON.parse(localStorage.getItem('customVerses')) || [];
+
+// Initialize the app
+function init() {
+    console.log('Initializing VerseCurator...');
+    
+    // Set up event listeners
+    document.getElementById('nextVerse').addEventListener('click', displayRandomVerse);
+    document.getElementById('shareButton').addEventListener('click', showShareModal);
+    document.getElementById('addCustomVerse').addEventListener('click', addCustomVerse);
+    
+    // Share modal events
+    document.querySelector('.close').addEventListener('click', hideShareModal);
+    document.getElementById('copyText').addEventListener('click', copyVerseToClipboard);
+    document.getElementById('shareTwitter').addEventListener('click', shareOnTwitter);
+    document.getElementById('shareWhatsApp').addEventListener('click', shareOnWhatsApp);
+    document.getElementById('shareEmail').addEventListener('click', shareViaEmail);
+    document.getElementById('downloadImage').addEventListener('click', downloadVerseAsImage);
+    document.getElementById('shareDevice').addEventListener('click', shareViaDevice);
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', (event) => {
+        if (event.target === document.getElementById('shareModal')) {
+            hideShareModal();
+        }
+    });
+    
+    // Start time updates
+    updateTimeDisplay();
+    setInterval(updateTimeDisplay, 1000); // Update every second
+    
+    // Display initial verse
+    displayRandomVerse();
+    
+    console.log('VerseCurator initialized successfully!');
+}
+
+// Update time display
+function updateTimeDisplay() {
+    const now = new Date();
+    const options = { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+    };
+    
+    const timeString = now.toLocaleDateString('en-US', options);
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    
+    document.getElementById('timeDisplay').textContent = timeString;
+    document.getElementById('timezoneDisplay').textContent = `Timezone: ${timezone}`;
+}
+
+// Get current time of day
+function getCurrentTimeOfDay() {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) return 'morning';
+    if (hour >= 12 && hour < 17) return 'afternoon';
+    if (hour >= 17 && hour < 21) return 'evening';
+    return 'night';
+}
+
+// Display random verse
+function displayRandomVerse() {
+    const timeOfDay = getCurrentTimeOfDay();
+    const verses = bibleVerses[timeOfDay] || bibleVerses.morning;
+    
+    if (verses.length > 0) {
+        const randomIndex = Math.floor(Math.random() * verses.length);
+        currentVerse = verses[randomIndex];
+        
+        document.getElementById('verseText').textContent = `"${currentVerse.text}"`;
+        document.getElementById('verseReference').textContent = currentVerse.reference;
+        document.getElementById('verseTranslation').textContent = currentVerse.translation;
+        
+        console.log(`Displayed ${timeOfDay} verse:`, currentVerse.reference);
+    }
+}
+
+// Share modal functions
+function showShareModal() {
+    document.getElementById('shareModal').style.display = 'block';
+}
+
+function hideShareModal() {
+    document.getElementById('shareModal').style.display = 'none';
+}
+
+// Share functions
+function copyVerseToClipboard() {
+    if (!currentVerse) return;
+    
+    const textToCopy = `${document.getElementById('verseText').textContent} - ${document.getElementById('verseReference').textContent}`;
+    
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        showNotification('Verse copied to clipboard!');
+        hideShareModal();
+    }).catch(err => {
+        console.error('Failed to copy:', err);
+        showNotification('Failed to copy verse');
+    });
+}
+
+function shareOnTwitter() {
+    if (!currentVerse) return;
+    const text = encodeURIComponent(`${document.getElementById('verseText').textContent} - ${document.getElementById('verseReference').textContent}`);
+    window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+    hideShareModal();
+}
+
+function shareOnWhatsApp() {
+    if (!currentVerse) return;
+    const text = encodeURIComponent(`${document.getElementById('verseText').textContent} - ${document.getElementById('verseReference').textContent}`);
+    window.open(`https://wa.me/?text=${text}`, '_blank');
+    hideShareModal();
+}
+
+function shareViaEmail() {
+    if (!currentVerse) return;
+    const subject = encodeURIComponent('Daily Bible Verse');
+    const body = encodeURIComponent(`${document.getElementById('verseText').textContent}\n\n- ${document.getElementById('verseReference').textContent}`);
+    window.open(`mailto:?subject=${subject}&body=${body}`);
+    hideShareModal();
+}
+
+function shareViaDevice() {
+    if (!currentVerse) return;
+    
+    if (navigator.share) {
+        navigator.share({
+            title: 'Daily Bible Verse',
+            text: `${document.getElementById('verseText').textContent} - ${document.getElementById('verseReference').textContent}`,
+            url: window.location.href
+        }).then(() => {
+            console.log('Verse shared successfully');
+        }).catch(err => {
+            console.log('Error sharing:', err);
+            copyVerseToClipboard(); // Fallback
+        });
+    } else {
+        copyVerseToClipboard(); // Fallback
+    }
+    hideShareModal();
+}
+
+function downloadVerseAsImage() {
+    showNotification('Image download feature coming soon!');
+    hideShareModal();
+}
+
+// Custom verses functions
+function addCustomVerse() {
+    const text = document.getElementById('customVerseText').value;
+    const reference = document.getElementById('customVerseRef').value;
+    const time = document.getElementById('customVerseTime').value;
+    
+    if (text && reference) {
+        customVerses.push({ text, reference, time, translation: 'CUSTOM' });
+        localStorage.setItem('customVerses', JSON.stringify(customVerses));
+        loadCustomVerses();
+        
+        // Clear inputs
+        document.getElementById('customVerseText').value = '';
+        document.getElementById('customVerseRef').value = '';
+        
+        showNotification('Custom verse added!');
+    }
+}
+
+function loadCustomVerses() {
+    const list = document.getElementById('customVersesList');
+    list.innerHTML = '';
+    
+    customVerses.forEach((verse, index) => {
+        const verseElement = document.createElement('div');
+        verseElement.className = 'custom-verse-item';
+        verseElement.innerHTML = `
+            <div class="verse-content">
+                <strong>"${verse.text}"</strong>
+                <div>${verse.reference} • <span class="verse-time">${verse.time}</span></div>
+            </div>
+            <button class="delete-verse" onclick="deleteCustomVerse(${index})">×</button>
+        `;
+        list.appendChild(verseElement);
+    });
+}
+
+function deleteCustomVerse(index) {
+    customVerses.splice(index, 1);
+    localStorage.setItem('customVerses', JSON.stringify(customVerses));
+    loadCustomVerses();
+    showNotification('Custom verse deleted!');
+}
+
+// Notification system
+function showNotification(message) {
+    // Remove existing notification
+    const existingNotification = document.querySelector('.notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+    
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
+// Load custom verses on init
+function loadCustomVersesOnInit() {
+    loadCustomVerses();
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    init();
+    loadCustomVersesOnInit();
+    console.log('DOM fully loaded and parsed');
+});
+
+// Error handling
+window.addEventListener('error', function(e) {
+    console.error('Error occurred:', e.error);
+    showNotification('An error occurred. Please refresh the page.');
+});
