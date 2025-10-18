@@ -1,15 +1,55 @@
-// Update the share modal in the HTML section to include device share
-// Add this button to your share-options-grid in HTML:
-// <button id="shareDevice" class="share-option device-share">
-//     <i class="fas fa-share-alt"></i>
-//     Share (Device)
-// </button>
+// Simple Bible verses database
+const bibleVerses = {
+    morning: [
+        {
+            text: "The steadfast love of the LORD never ceases; his mercies never come to an end; they are new every morning; great is your faithfulness.",
+            reference: "Lamentations 3:22-23",
+            translation: "ESV"
+        },
+        {
+            text: "This is the day that the LORD has made; let us rejoice and be glad in it.",
+            reference: "Psalm 118:24",
+            translation: "ESV"
+        }
+    ],
+    afternoon: [
+        {
+            text: "And let us not grow weary of doing good, for in due season we will reap, if we do not give up.",
+            reference: "Galatians 6:9",
+            translation: "ESV"
+        }
+    ],
+    evening: [
+        {
+            text: "In peace I will both lie down and sleep; for you alone, O LORD, make me dwell in safety.",
+            reference: "Psalm 4:8",
+            translation: "ESV"
+        }
+    ],
+    night: [
+        {
+            text: "When I remember you upon my bed, and meditate on you in the watches of the night.",
+            reference: "Psalm 63:6",
+            translation: "ESV"
+        }
+    ]
+};
 
-// Enhanced share modal setup in JavaScript
-function setupEventListeners() {
-    // ... existing event listeners ...
+// Initialize variables
+let currentVerse = null;
+let customVerses = JSON.parse(localStorage.getItem('customVerses')) || [];
+
+// Initialize the app
+function init() {
+    console.log('Initializing VerseCurator...');
     
-    // Share options
+    // Set up event listeners
+    document.getElementById('nextVerse').addEventListener('click', displayRandomVerse);
+    document.getElementById('shareButton').addEventListener('click', showShareModal);
+    document.getElementById('addCustomVerse').addEventListener('click', addCustomVerse);
+    
+    // Share modal events
+    document.querySelector('.close').addEventListener('click', hideShareModal);
     document.getElementById('copyText').addEventListener('click', copyVerseToClipboard);
     document.getElementById('shareTwitter').addEventListener('click', shareOnTwitter);
     document.getElementById('shareWhatsApp').addEventListener('click', shareOnWhatsApp);
@@ -17,98 +57,183 @@ function setupEventListeners() {
     document.getElementById('downloadImage').addEventListener('click', downloadVerseAsImage);
     document.getElementById('shareDevice').addEventListener('click', shareViaDevice);
     
-    // ... rest of existing code ...
+    // Close modal when clicking outside
+    window.addEventListener('click', (event) => {
+        if (event.target === document.getElementById('shareModal')) {
+            hideShareModal();
+        }
+    });
+    
+    // Start time updates
+    updateTimeDisplay();
+    setInterval(updateTimeDisplay, 1000); // Update every second
+    
+    // Display initial verse
+    displayRandomVerse();
+    
+    console.log('VerseCurator initialized successfully!');
 }
 
-// Device Native Share Function
-function shareViaDevice() {
-    if (!navigator.share) {
-        // Fallback for browsers that don't support Web Share API
-        alert('Device sharing not supported in your browser. Try copying the text instead.');
-        return;
-    }
-    
-    const verseData = {
-        title: 'Daily Bible Verse',
-        text: `${elements.verseText.textContent} - ${elements.verseReference.textContent}`,
-        url: window.location.href
+// Update time display
+function updateTimeDisplay() {
+    const now = new Date();
+    const options = { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
     };
     
-    navigator.share(verseData)
-        .then(() => console.log('Verse shared successfully'))
-        .catch((error) => {
-            console.log('Error sharing:', error);
-            // Fallback to copy to clipboard
-            copyVerseToClipboard();
-        });
-}
-
-// Enhanced share modal HTML update (replace your existing share-options-grid)
-function updateShareModalHTML() {
-    const shareGrid = document.querySelector('.share-options-grid');
-    shareGrid.innerHTML = `
-        <button id="copyText" class="share-option">
-            <i class="fas fa-copy"></i>
-            Copy Text
-        </button>
-        <button id="shareTwitter" class="share-option">
-            <i class="fab fa-twitter"></i>
-            Twitter
-        </button>
-        <button id="shareWhatsApp" class="share-option">
-            <i class="fab fa-whatsapp"></i>
-            WhatsApp
-        </button>
-        <button id="shareEmail" class="share-option">
-            <i class="fas fa-envelope"></i>
-            Email
-        </button>
-        <button id="shareFacebook" class="share-option">
-            <i class="fab fa-facebook"></i>
-            Facebook
-        </button>
-        <button id="downloadImage" class="share-option">
-            <i class="fas fa-download"></i>
-            Download Image
-        </button>
-        <button id="copyImage" class="share-option">
-            <i class="fas fa-image"></i>
-            Copy Image
-        </button>
-        <button id="shareSMS" class="share-option">
-            <i class="fas fa-comment-sms"></i>
-            SMS
-        </button>
-        <button id="shareDevice" class="share-option device-share">
-            <i class="fas fa-share-alt"></i>
-            Share (Device)
-        </button>
-    `;
+    const timeString = now.toLocaleDateString('en-US', options);
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     
-    // Reattach event listeners after updating HTML
-    document.getElementById('shareDevice').addEventListener('click', shareViaDevice);
-    // ... reattach other event listeners ...
+    document.getElementById('timeDisplay').textContent = timeString;
+    document.getElementById('timezoneDisplay').textContent = `Timezone: ${timezone}`;
 }
 
-// Enhanced copy to clipboard with better feedback
+// Get current time of day
+function getCurrentTimeOfDay() {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) return 'morning';
+    if (hour >= 12 && hour < 17) return 'afternoon';
+    if (hour >= 17 && hour < 21) return 'evening';
+    return 'night';
+}
+
+// Display random verse
+function displayRandomVerse() {
+    const timeOfDay = getCurrentTimeOfDay();
+    const verses = bibleVerses[timeOfDay] || bibleVerses.morning;
+    
+    if (verses.length > 0) {
+        const randomIndex = Math.floor(Math.random() * verses.length);
+        currentVerse = verses[randomIndex];
+        
+        document.getElementById('verseText').textContent = `"${currentVerse.text}"`;
+        document.getElementById('verseReference').textContent = currentVerse.reference;
+        document.getElementById('verseTranslation').textContent = currentVerse.translation;
+        
+        console.log(`Displayed ${timeOfDay} verse:`, currentVerse.reference);
+    }
+}
+
+// Share modal functions
+function showShareModal() {
+    document.getElementById('shareModal').style.display = 'block';
+}
+
+function hideShareModal() {
+    document.getElementById('shareModal').style.display = 'none';
+}
+
+// Share functions
 function copyVerseToClipboard() {
     if (!currentVerse) return;
     
-    const textToCopy = `${elements.verseText.textContent} - ${elements.verseReference.textContent}`;
+    const textToCopy = `${document.getElementById('verseText').textContent} - ${document.getElementById('verseReference').textContent}`;
     
     navigator.clipboard.writeText(textToCopy).then(() => {
         showNotification('Verse copied to clipboard!');
+        hideShareModal();
     }).catch(err => {
-        console.error('Failed to copy text: ', err);
-        // Fallback for older browsers
-        const textArea = document.createElement('textarea');
-        textArea.value = textToCopy;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        showNotification('Verse copied to clipboard!');
+        console.error('Failed to copy:', err);
+        showNotification('Failed to copy verse');
     });
+}
+
+function shareOnTwitter() {
+    if (!currentVerse) return;
+    const text = encodeURIComponent(`${document.getElementById('verseText').textContent} - ${document.getElementById('verseReference').textContent}`);
+    window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+    hideShareModal();
+}
+
+function shareOnWhatsApp() {
+    if (!currentVerse) return;
+    const text = encodeURIComponent(`${document.getElementById('verseText').textContent} - ${document.getElementById('verseReference').textContent}`);
+    window.open(`https://wa.me/?text=${text}`, '_blank');
+    hideShareModal();
+}
+
+function shareViaEmail() {
+    if (!currentVerse) return;
+    const subject = encodeURIComponent('Daily Bible Verse');
+    const body = encodeURIComponent(`${document.getElementById('verseText').textContent}\n\n- ${document.getElementById('verseReference').textContent}`);
+    window.open(`mailto:?subject=${subject}&body=${body}`);
+    hideShareModal();
+}
+
+function shareViaDevice() {
+    if (!currentVerse) return;
+    
+    if (navigator.share) {
+        navigator.share({
+            title: 'Daily Bible Verse',
+            text: `${document.getElementById('verseText').textContent} - ${document.getElementById('verseReference').textContent}`,
+            url: window.location.href
+        }).then(() => {
+            console.log('Verse shared successfully');
+        }).catch(err => {
+            console.log('Error sharing:', err);
+            copyVerseToClipboard(); // Fallback
+        });
+    } else {
+        copyVerseToClipboard(); // Fallback
+    }
+    hideShareModal();
+}
+
+function downloadVerseAsImage() {
+    showNotification('Image download feature coming soon!');
+    hideShareModal();
+}
+
+// Custom verses functions
+function addCustomVerse() {
+    const text = document.getElementById('customVerseText').value;
+    const reference = document.getElementById('customVerseRef').value;
+    const time = document.getElementById('customVerseTime').value;
+    
+    if (text && reference) {
+        customVerses.push({ text, reference, time, translation: 'CUSTOM' });
+        localStorage.setItem('customVerses', JSON.stringify(customVerses));
+        loadCustomVerses();
+        
+        // Clear inputs
+        document.getElementById('customVerseText').value = '';
+        document.getElementById('customVerseRef').value = '';
+        
+        showNotification('Custom verse added!');
+    }
+}
+
+function loadCustomVerses() {
+    const list = document.getElementById('customVersesList');
+    list.innerHTML = '';
+    
+    customVerses.forEach((verse, index) => {
+        const verseElement = document.createElement('div');
+        verseElement.className = 'custom-verse-item';
+        verseElement.innerHTML = `
+            <div class="verse-content">
+                <strong>"${verse.text}"</strong>
+                <div>${verse.reference} • <span class="verse-time">${verse.time}</span></div>
+            </div>
+            <button class="delete-verse" onclick="deleteCustomVerse(${index})">×</button>
+        `;
+        list.appendChild(verseElement);
+    });
+}
+
+function deleteCustomVerse(index) {
+    customVerses.splice(index, 1);
+    localStorage.setItem('customVerses', JSON.stringify(customVerses));
+    loadCustomVerses();
+    showNotification('Custom verse deleted!');
 }
 
 // Notification system
@@ -122,19 +247,6 @@ function showNotification(message) {
     const notification = document.createElement('div');
     notification.className = 'notification';
     notification.textContent = message;
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #2ecc71;
-        color: white;
-        padding: 15px 20px;
-        border-radius: 5px;
-        z-index: 1001;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        animation: slideIn 0.3s ease;
-    `;
-    
     document.body.appendChild(notification);
     
     setTimeout(() => {
@@ -143,23 +255,20 @@ function showNotification(message) {
     }, 3000);
 }
 
-// Add these CSS animations for notifications
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideIn {
-        from { transform: translateX(100%); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-    }
-    
-    @keyframes slideOut {
-        from { transform: translateX(0); opacity: 1; }
-        to { transform: translateX(100%); opacity: 0; }
-    }
-`;
-document.head.appendChild(style);
+// Load custom verses on init
+function loadCustomVersesOnInit() {
+    loadCustomVerses();
+}
 
-// Initialize the enhanced app
+// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     init();
-    updateShareModalHTML();
+    loadCustomVersesOnInit();
+    console.log('DOM fully loaded and parsed');
+});
+
+// Error handling
+window.addEventListener('error', function(e) {
+    console.error('Error occurred:', e.error);
+    showNotification('An error occurred. Please refresh the page.');
 });
