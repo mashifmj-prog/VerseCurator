@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Bible Verses</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌿 Daily Bible Verses</h1>
+            <div class="time-display" id="timeDisplay"></div>
+        </header>
+
+        <main>
+            <div class="verse-card" id="verseCard">
+                <div class="verse-content">
+                    <p class="verse-text" id="verseText">Click the button below to get an encouraging Bible verse</p>
+                    <p class="verse-reference" id="verseReference"></p>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="getVerse" class="btn primary">Get New Verse</button>
+                <div class="time-buttons">
+                    <button id="morningVerse" class="btn secondary">🌅 Morning Verse</button>
+                    <button id="afternoonVerse" class="btn secondary">☀️ Afternoon Verse</button>
+                </div>
+            </div>
+
+            <div class="share-options">
+                <h3>Share This Verse</h3>
+                <div class="share-buttons">
+                    <button id="copyText" class="btn share">📋 Copy Text</button>
+                    <button id="shareTwitter" class="btn share">🐦 Twitter</button>
+                    <button id="shareWhatsApp" class="btn share">💚 WhatsApp</button>
+                    <button id="shareEmail" class="btn share">📧 Email</button>
+                    <button id="downloadImage" class="btn share">🖼️ Download as Image</button>
+                </div>
+            </div>
+
+            <div class="auto-mode">
+                <label class="switch">
+                    <input type="checkbox" id="autoMode">
+                    <span class="slider"></span>
+                </label>
+                <span>Auto-display verses based on time of day</span>
+            </div>
+        </main>
+    </div>
+
+    <canvas id="verseCanvas" style="display: none;"></canvas>
+    
+    <script src="script.js"></script>
+</body>
+</html>
