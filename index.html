@@ -20,7 +20,143 @@
                     <p class="tagline">Curate • Share • Inspire</p>
                 </div>
             </div>
-            <div class="time-display" id="timeDisplay"></div>
-            <div class="timezone-display" id="timezoneDisplay"></div>
+            <div class="header-info">
+                <div class="time-display" id="timeDisplay">Loading time...</div>
+                <div class="timezone-display" id="timezoneDisplay">Detecting timezone...</div>
+            </div>
         </header>
-        <!-- ... rest of the HTML remains the same ... -->
+
+        <main>
+            <!-- Settings Panel -->
+            <div class="settings-panel">
+                <div class="setting-group">
+                    <label>Translation:</label>
+                    <select id="translationSelect">
+                        <option value="ESV">ESV - English Standard Version</option>
+                        <option value="NIV">NIV - New International Version</option>
+                        <option value="KJV">KJV - King James Version</option>
+                        <option value="NKJV">NKJV - New King James Version</option>
+                        <option value="NLT">NLT - New Living Translation</option>
+                        <option value="NASB">NASB - New American Standard Bible</option>
+                        <option value="MEV">MEV - Modern English Version</option>
+                        <option value="custom">Custom Translation</option>
+                    </select>
+                </div>
+
+                <div class="setting-group">
+                    <label>Time of Day:</label>
+                    <select id="timeOfDaySelect">
+                        <option value="auto">Auto (Based on Time)</option>
+                        <option value="morning">Morning (5AM - 12PM)</option>
+                        <option value="afternoon">Afternoon (12PM - 5PM)</option>
+                        <option value="evening">Evening (5PM - 9PM)</option>
+                        <option value="night">Night (9PM - 5AM)</option>
+                    </select>
+                </div>
+
+                <div class="setting-group">
+                    <label>App Mode:</label>
+                    <select id="appModeSelect">
+                        <option value="general">General Mode</option>
+                        <option value="occasion">Occasion Mode</option>
+                    </select>
+                </div>
+
+                <div class="setting-group" id="occasionGroup" style="display: none;">
+                    <label>Current Occasion:</label>
+                    <select id="occasionSelect">
+                        <option value="christmas">Christmas (Dec)</option>
+                        <option value="easter">Easter</option>
+                        <option value="thanksgiving">Thanksgiving</option>
+                        <option value="newyear">New Year</option>
+                        <option value="lent">Lent</option>
+                        <option value="advent">Advent</option>
+                    </select>
+                </div>
+
+                <div class="setting-group">
+                    <label>Canvas Style:</label>
+                    <select id="canvasStyleSelect">
+                        <option value="1">Classic Gradient</option>
+                        <option value="2">Parchment Style</option>
+                        <option value="3">Nature Theme</option>
+                        <option value="4">Minimal Dark</option>
+                        <option value="5">Colorful Abstract</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Verse Display -->
+            <div class="verse-card" id="verseCard">
+                <div class="verse-content">
+                    <p class="verse-text" id="verseText">Click "Get Next Verse" to start...</p>
+                    <p class="verse-reference" id="verseReference"></p>
+                    <p class="verse-translation" id="verseTranslation"></p>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button id="nextVerse" class="btn primary">↻ Get Next Verse</button>
+                <button id="shareButton" class="btn secondary">📤 Share Verse</button>
+            </div>
+
+            <!-- Share Modal -->
+            <div id="shareModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3>Share This Verse</h3>
+                    <div class="share-options-grid">
+                        <button id="copyText" class="share-option">
+                            <i class="fas fa-copy"></i>
+                            Copy Text
+                        </button>
+                        <button id="shareTwitter" class="share-option">
+                            <i class="fab fa-twitter"></i>
+                            Twitter
+                        </button>
+                        <button id="shareWhatsApp" class="share-option">
+                            <i class="fab fa-whatsapp"></i>
+                            WhatsApp
+                        </button>
+                        <button id="shareEmail" class="share-option">
+                            <i class="fas fa-envelope"></i>
+                            Email
+                        </button>
+                        <button id="downloadImage" class="share-option">
+                            <i class="fas fa-download"></i>
+                            Download Image
+                        </button>
+                        <button id="shareDevice" class="share-option device-share">
+                            <i class="fas fa-share-alt"></i>
+                            Share (Device)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom Verses Management -->
+            <div class="custom-verses-section">
+                <h3>📝 Custom Verses Management</h3>
+                <div class="custom-verse-form">
+                    <input type="text" id="customVerseText" placeholder="Verse text..." class="form-input">
+                    <input type="text" id="customVerseRef" placeholder="Reference (e.g., John 3:16)" class="form-input">
+                    <select id="customVerseTime" class="form-input">
+                        <option value="general">General</option>
+                        <option value="morning">Morning</option>
+                        <option value="afternoon">Afternoon</option>
+                        <option value="evening">Evening</option>
+                        <option value="night">Night</option>
+                    </select>
+                    <button id="addCustomVerse" class="btn primary">Add Custom Verse</button>
+                </div>
+                <div id="customVersesList" class="custom-verses-list"></div>
+            </div>
+        </main>
+    </div>
+
+    <canvas id="verseCanvas" style="display: none;"></canvas>
+    
+    <script src="script.js"></script>
+</body>
+</html>
