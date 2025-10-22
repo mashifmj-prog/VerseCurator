@@ -3,160 +3,378 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VerseCurator - Smart Bible Verse Curation</title>
+    <title>VerseCurator - Intelligent Bible Verse Curation</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
 </head>
-<body>
-    <div class="container">
-        <header>
-            <div class="logo-header">
-                <div class="logo">
-                    <i class="fas fa-scroll"></i>
+<body class="light-mode">
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">
+                        <i class="fas fa-scroll"></i>
+                    </div>
+                    <div class="title-group">
+                        <h1 class="app-title">VerseCurator</h1>
+                        <p class="app-tagline">Curate • Share • Inspire</p>
+                    </div>
                 </div>
-                <div class="title-section">
-                    <h1>VerseCurator</h1>
-                    <p class="tagline">Curate • Share • Inspire</p>
-                </div>
-            </div>
-            <div class="header-info">
-                <div class="time-display" id="timeDisplay">Loading time...</div>
-                <div class="timezone-display" id="timezoneDisplay">Detecting timezone...</div>
-            </div>
-        </header>
-
-        <main>
-            <!-- Settings Panel -->
-            <div class="settings-panel">
-                <div class="setting-group">
-                    <label>Translation:</label>
-                    <select id="translationSelect">
-                        <option value="ESV">ESV - English Standard Version</option>
-                        <option value="NIV">NIV - New International Version</option>
-                        <option value="KJV">KJV - King James Version</option>
-                        <option value="NKJV">NKJV - New King James Version</option>
-                        <option value="NLT">NLT - New Living Translation</option>
-                        <option value="NASB">NASB - New American Standard Bible</option>
-                        <option value="MEV">MEV - Modern English Version</option>
-                        <option value="custom">Custom Translation</option>
-                    </select>
-                </div>
-
-                <div class="setting-group">
-                    <label>Time of Day:</label>
-                    <select id="timeOfDaySelect">
-                        <option value="auto">Auto (Based on Time)</option>
-                        <option value="morning">Morning (5AM - 12PM)</option>
-                        <option value="afternoon">Afternoon (12PM - 5PM)</option>
-                        <option value="evening">Evening (5PM - 9PM)</option>
-                        <option value="night">Night (9PM - 5AM)</option>
-                    </select>
-                </div>
-
-                <div class="setting-group">
-                    <label>App Mode:</label>
-                    <select id="appModeSelect">
-                        <option value="general">General Mode</option>
-                        <option value="occasion">Occasion Mode</option>
-                    </select>
-                </div>
-
-                <div class="setting-group" id="occasionGroup" style="display: none;">
-                    <label>Current Occasion:</label>
-                    <select id="occasionSelect">
-                        <option value="christmas">Christmas (Dec)</option>
-                        <option value="easter">Easter</option>
-                        <option value="thanksgiving">Thanksgiving</option>
-                        <option value="newyear">New Year</option>
-                        <option value="lent">Lent</option>
-                        <option value="advent">Advent</option>
-                    </select>
-                </div>
-
-                <div class="setting-group">
-                    <label>Canvas Style:</label>
-                    <select id="canvasStyleSelect">
-                        <option value="1">Classic Gradient</option>
-                        <option value="2">Parchment Style</option>
-                        <option value="3">Nature Theme</option>
-                        <option value="4">Minimal Dark</option>
-                        <option value="5">Colorful Abstract</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Verse Display -->
-            <div class="verse-card" id="verseCard">
-                <div class="verse-content">
-                    <p class="verse-text" id="verseText">Click "Get Next Verse" to start...</p>
-                    <p class="verse-reference" id="verseReference"></p>
-                    <p class="verse-translation" id="verseTranslation"></p>
-                </div>
-            </div>
-
-            <!-- Controls -->
-            <div class="controls">
-                <button id="nextVerse" class="btn primary">↻ Get Next Verse</button>
-                <button id="shareButton" class="btn secondary">📤 Share Verse</button>
-            </div>
-
-            <!-- Share Modal -->
-            <div id="shareModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <h3>Share This Verse</h3>
-                    <div class="share-options-grid">
-                        <button id="copyText" class="share-option">
-                            <i class="fas fa-copy"></i>
-                            Copy Text
-                        </button>
-                        <button id="shareTwitter" class="share-option">
-                            <i class="fab fa-twitter"></i>
-                            Twitter
-                        </button>
-                        <button id="shareWhatsApp" class="share-option">
-                            <i class="fab fa-whatsapp"></i>
-                            WhatsApp
-                        </button>
-                        <button id="shareEmail" class="share-option">
-                            <i class="fas fa-envelope"></i>
-                            Email
-                        </button>
-                        <button id="downloadImage" class="share-option">
-                            <i class="fas fa-download"></i>
-                            Download Image
-                        </button>
-                        <button id="shareDevice" class="share-option device-share">
-                            <i class="fas fa-share-alt"></i>
-                            Share (Device)
-                        </button>
+                
+                <div class="header-controls">
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <div class="time-display">
+                        <div class="current-time" id="currentTime">Loading...</div>
+                        <div class="current-date" id="currentDate"></div>
                     </div>
                 </div>
             </div>
-
-            <!-- Custom Verses Management -->
-            <div class="custom-verses-section">
-                <h3>📝 Custom Verses Management</h3>
-                <div class="custom-verse-form">
-                    <input type="text" id="customVerseText" placeholder="Verse text..." class="form-input">
-                    <input type="text" id="customVerseRef" placeholder="Reference (e.g., John 3:16)" class="form-input">
-                    <select id="customVerseTime" class="form-input">
-                        <option value="general">General</option>
-                        <option value="morning">Morning</option>
-                        <option value="afternoon">Afternoon</option>
-                        <option value="evening">Evening</option>
-                        <option value="night">Night</option>
-                    </select>
-                    <button id="addCustomVerse" class="btn primary">Add Custom Verse</button>
+            
+            <div class="time-period-indicator">
+                <div class="period active" data-period="morning">
+                    <i class="fas fa-sunrise"></i>
+                    <span>Morning</span>
+                    <small>5:00AM - 11:59AM</small>
                 </div>
-                <div id="customVersesList" class="custom-verses-list"></div>
+                <div class="period" data-period="day">
+                    <i class="fas fa-sun"></i>
+                    <span>Day</span>
+                    <small>12:00PM - 2:59PM</small>
+                </div>
+                <div class="period" data-period="afternoon">
+                    <i class="fas fa-cloud-sun"></i>
+                    <span>Afternoon</span>
+                    <small>3:00PM - 5:59PM</small>
+                </div>
+                <div class="period" data-period="evening">
+                    <i class="fas fa-sunset"></i>
+                    <span>Evening</span>
+                    <small>6:00PM - 9:59PM</small>
+                </div>
+                <div class="period" data-period="night">
+                    <i class="fas fa-moon"></i>
+                    <span>Night</span>
+                    <small>10:00PM - 4:59AM</small>
+                </div>
             </div>
+        </header>
+
+        <!-- Main App Content -->
+        <main class="app-main">
+            <!-- Control Panel -->
+            <section class="control-panel">
+                <div class="panel-grid">
+                    <div class="control-group">
+                        <label class="control-label">
+                            <i class="fas fa-bible"></i>
+                            Translation
+                        </label>
+                        <select class="control-select" id="translationSelect">
+                            <option value="ESV">ESV - English Standard Version</option>
+                            <option value="NIV">NIV - New International Version</option>
+                            <option value="KJV">KJV - King James Version</option>
+                            <option value="NKJV">NKJV - New King James Version</option>
+                            <option value="NLT">NLT - New Living Translation</option>
+                            <option value="NASB">NASB - New American Standard Bible</option>
+                            <option value="MEV">MEV - Modern English Version</option>
+                            <option value="custom">Custom Translation</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">
+                            <i class="fas fa-clock"></i>
+                            Display Mode
+                        </label>
+                        <select class="control-select" id="displayModeSelect">
+                            <option value="auto">Auto (Time-based)</option>
+                            <option value="morning">🌅 Morning</option>
+                            <option value="day">☀️ Day</option>
+                            <option value="afternoon">🌇 Afternoon</option>
+                            <option value="evening">🌆 Evening</option>
+                            <option value="night">🌙 Night</option>
+                            <option value="random">🎲 Random</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">
+                            <i class="fas fa-palette"></i>
+                            Canvas Style
+                        </label>
+                        <select class="control-select" id="canvasStyleSelect">
+                            <option value="1">🎨 Classic Gradient</option>
+                            <option value="2">📜 Parchment Style</option>
+                            <option value="3">🌿 Nature Theme</option>
+                            <option value="4">⚫ Minimal Dark</option>
+                            <option value="5">🌈 Colorful Abstract</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">
+                            <i class="fas fa-calendar-alt"></i>
+                            App Mode
+                        </label>
+                        <select class="control-select" id="appModeSelect">
+                            <option value="general">General Mode</option>
+                            <option value="occasion">Occasion Mode</option>
+                            <option value="collection">Collection Mode</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Occasion Settings -->
+                <div class="occasion-settings" id="occasionSettings" style="display: none;">
+                    <div class="control-group full-width">
+                        <label class="control-label">
+                            <i class="fas fa-star"></i>
+                            Current Occasion
+                        </label>
+                        <select class="control-select" id="occasionSelect">
+                            <option value="christmas">🎄 Christmas (Dec)</option>
+                            <option value="easter">🐣 Easter</option>
+                            <option value="thanksgiving">🦃 Thanksgiving</option>
+                            <option value="newyear">🎊 New Year</option>
+                            <option value="lent">✝️ Lent</option>
+                            <option value="advent">🕯️ Advent</option>
+                            <option value="pentecost">🔥 Pentecost</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Verse Display Section -->
+            <section class="verse-section">
+                <div class="verse-card" id="verseCard">
+                    <div class="verse-background"></div>
+                    <div class="verse-content">
+                        <div class="verse-header">
+                            <span class="verse-time-badge" id="verseTimeBadge">🌅 Morning</span>
+                            <span class="verse-translation-badge" id="verseTranslationBadge">ESV</span>
+                        </div>
+                        <p class="verse-text" id="verseText">
+                            "The steadfast love of the LORD never ceases; his mercies never come to an end; they are new every morning; great is your faithfulness."
+                        </p>
+                        <p class="verse-reference" id="verseReference">Lamentations 3:22-23</p>
+                        <div class="verse-actions">
+                            <button class="action-btn favorite-btn" id="favoriteVerse">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="action-btn note-btn" id="addNote">
+                                <i class="far fa-sticky-note"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn btn-primary btn-large" id="nextVerse">
+                        <i class="fas fa-random"></i>
+                        Get Next Verse
+                    </button>
+                    <button class="btn btn-secondary btn-large" id="shareButton">
+                        <i class="fas fa-share-alt"></i>
+                        Share Verse
+                    </button>
+                </div>
+            </section>
+
+            <!-- Quick Stats -->
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="versesViewed">0</div>
+                            <div class="stat-label">Verses Viewed</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-share"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="versesShared">0</div>
+                            <div class="stat-label">Verses Shared</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="versesFavorited">0</div>
+                            <div class="stat-label">Favorites</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="currentStreak">0</div>
+                            <div class="stat-label">Day Streak</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Custom Verses Section -->
+            <section class="custom-section">
+                <div class="section-header">
+                    <h3>
+                        <i class="fas fa-plus-circle"></i>
+                        Custom Verses
+                    </h3>
+                    <button class="btn btn-outline" id="toggleCustomForm">
+                        <i class="fas fa-plus"></i>
+                        Add New
+                    </button>
+                </div>
+
+                <div class="custom-form" id="customForm" style="display: none;">
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <textarea class="form-input" id="customVerseText" placeholder="Enter verse text..." rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" id="customVerseRef" placeholder="Reference (e.g., John 3:16)">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-input" id="customVerseTime">
+                                <option value="general">General</option>
+                                <option value="morning">🌅 Morning</option>
+                                <option value="day">☀️ Day</option>
+                                <option value="afternoon">🌇 Afternoon</option>
+                                <option value="evening">🌆 Evening</option>
+                                <option value="night">🌙 Night</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" id="addCustomVerse">
+                                <i class="fas fa-save"></i>
+                                Save Verse
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="custom-verses-list" id="customVersesList">
+                    <!-- Custom verses will be populated here -->
+                </div>
+            </section>
         </main>
     </div>
 
+    <!-- Share Modal -->
+    <div class="modal" id="shareModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-share-alt"></i>
+                    Share This Verse
+                </h3>
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="share-options-grid">
+                    <button class="share-option" id="copyText">
+                        <div class="share-icon">
+                            <i class="fas fa-copy"></i>
+                        </div>
+                        <span>Copy Text</span>
+                    </button>
+                    <button class="share-option" id="shareTwitter">
+                        <div class="share-icon">
+                            <i class="fab fa-twitter"></i>
+                        </div>
+                        <span>Twitter</span>
+                    </button>
+                    <button class="share-option" id="shareWhatsApp">
+                        <div class="share-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <span>WhatsApp</span>
+                    </button>
+                    <button class="share-option" id="shareEmail">
+                        <div class="share-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <span>Email</span>
+                    </button>
+                    <button class="share-option" id="downloadImage">
+                        <div class="share-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <span>Download Image</span>
+                    </button>
+                    <button class="share-option" id="shareFacebook">
+                        <div class="share-icon">
+                            <i class="fab fa-facebook"></i>
+                        </div>
+                        <span>Facebook</span>
+                    </button>
+                    <button class="share-option device-share" id="shareDevice">
+                        <div class="share-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <span>Device Share</span>
+                    </button>
+                    <button class="share-option" id="shareSMS">
+                        <div class="share-icon">
+                            <i class="fas fa-comment-sms"></i>
+                        </div>
+                        <span>SMS</span>
+                    </button>
+                    <button class="share-option" id="copyImage">
+                        <div class="share-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <span>Copy Image</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Note Modal -->
+    <div class="modal" id="noteModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-sticky-note"></i>
+                    Add Note to Verse
+                </h3>
+                <button class="modal-close" id="closeNoteModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea class="note-input" id="verseNote" placeholder="Add your personal notes, reflections, or thoughts about this verse..." rows="6"></textarea>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" id="cancelNote">Cancel</button>
+                    <button class="btn btn-primary" id="saveNote">Save Note</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Canvas for Image Generation -->
     <canvas id="verseCanvas" style="display: none;"></canvas>
-    
+
+    <!-- Scripts -->
     <script src="script.js"></script>
 </body>
 </html>
