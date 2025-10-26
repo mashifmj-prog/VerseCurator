@@ -65,6 +65,334 @@
             padding-bottom: 2rem;
         }
 
+        /* Rate Button Styles */
+        .rate-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: var(--shadow-hover);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        .rate-button.pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+            }
+        }
+
+        .rate-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Rating Modal Styles */
+        .rating-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .rating-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-hover);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .rating-stars {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .rating-star {
+            font-size: 2.5em;
+            color: #ddd;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .rating-star:hover,
+        .rating-star.active {
+            color: #ffd700;
+            transform: scale(1.2);
+        }
+
+        .rating-comment {
+            width: 100%;
+            height: 80px;
+            margin: 15px 0;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            resize: none;
+            font-family: inherit;
+        }
+
+        .rating-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .rating-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .rating-submit {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .rating-cancel {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .rating-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Warning Modal Styles */
+        .warning-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .warning-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-hover);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .warning-icon {
+            font-size: 3rem;
+            color: #ffa500;
+            margin-bottom: 1rem;
+        }
+
+        .warning-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .warning-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .warning-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .warning-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .warning-outline {
+            background: transparent;
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        /* Theme Selection Styles */
+        .theme-selection {
+            margin: 20px 0;
+        }
+
+        .theme-options {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .theme-options label {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .theme-options select {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .theme-preview {
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            background: #f0f0f0;
+        }
+
+        .theme-preview canvas {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .image-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .share-action-btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background: var(--gradient);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .share-action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .share-action-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Schedule Modal Styles */
+        .schedule-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .schedule-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-hover);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .schedule-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .schedule-option {
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--bg-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .schedule-option:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .schedule-option.active {
+            border-color: var(--primary-color);
+            background: var(--gradient);
+            color: white;
+        }
+
+        .custom-time {
+            margin-top: 15px;
+        }
+
+        .time-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: inherit;
+        }
+
         /* Mobile-First Header */
         .app-header {
             background: var(--gradient);
@@ -163,7 +491,34 @@
         }
 
         .time-display {
-            display: none; /* Hidden on mobile to save space */
+            display: none;
+        }
+
+        /* Mode Indicator */
+        .mode-indicator {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+
+        .mode-indicator.auto {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .mode-indicator.manual {
+            background: rgba(255, 215, 0, 0.3);
+            color: #ffd700;
+        }
+
+        .countdown {
+            font-size: 0.7rem;
+            opacity: 0.8;
+            margin-left: 0.5rem;
         }
 
         /* Mobile Time Period Indicator */
@@ -371,6 +726,15 @@
             gap: 0.75rem;
         }
 
+        .action-buttons-row {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .action-buttons-row .btn {
+            flex: 1;
+        }
+
         .btn {
             padding: 1rem 1.5rem;
             border: none;
@@ -553,6 +917,81 @@
             flex-shrink: 0;
         }
 
+        /* Share Type Selection */
+        .share-type-selection {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            justify-content: center;
+        }
+
+        .share-type-btn {
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            flex: 1;
+            text-align: center;
+        }
+
+        .share-type-btn.active {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Enhanced share options - FIXED DARK MODE CONTRAST */
+        .share-with-link .share-icon {
+            position: relative;
+        }
+
+        .share-with-link .share-icon::after {
+            content: '🔗';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 0.7rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* FIXED: Dark mode share modal text contrast */
+        .dark-mode .share-option span {
+            color: #ffffff !important;
+        }
+
+        .dark-mode .share-type-btn {
+            color: #e0e0e0;
+        }
+
+        .dark-mode .share-type-btn.active {
+            color: #ffffff;
+        }
+
+        .dark-mode .theme-options label {
+            color: #ffffff;
+        }
+
+        .dark-mode .theme-options select {
+            color: #ffffff;
+            background: var(--bg-secondary);
+        }
+
+        .dark-mode .theme-options select option {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
         /* Modal Styles - Mobile Full Screen */
         .modal {
             display: none;
@@ -616,7 +1055,7 @@
         /* Share Options - Mobile Grid */
         .share-options-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 0.75rem;
         }
 
@@ -651,13 +1090,18 @@
         .share-option span {
             font-size: 0.8rem;
             font-weight: 600;
+            color: var(--text-primary); /* Ensures proper contrast */
         }
 
         .share-option.device-share {
             background: var(--gradient);
             color: white;
             border-color: transparent;
-            grid-column: span 3;
+            grid-column: span 2;
+        }
+
+        .share-option.device-share span {
+            color: white; /* White text for device share button */
         }
 
         /* Note Modal */
@@ -702,9 +1146,313 @@
             background: #e74c3c;
         }
 
+        .notification.info {
+            background: #3498db;
+        }
+
         @keyframes slideIn {
             from { transform: translateY(-100%); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideOut {
+            from { transform: translateY(0); opacity: 1; }
+            to { transform: translateY(-100%); opacity: 0; }
+        }
+
+        /* === NEW ENHANCEMENTS CSS === */
+        
+        /* Collapsible Sections */
+        .collapsible-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .collapsible-btn {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1.25rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .collapsible-btn:hover {
+            background: var(--bg-secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .collapsible-btn i:last-child {
+            transition: transform 0.3s ease;
+        }
+
+        .collapsible-btn.active i:last-child {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            display: none;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 14px 14px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        /* Share History Styles */
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .history-content {
+            flex: 1;
+        }
+
+        .history-verse {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .history-details {
+            display: flex;
+            gap: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .history-platform {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .history-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .history-action-btn {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .history-action-btn:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .empty-history {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+
+        /* WhatsApp Broadcast Styles */
+        .broadcast-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .broadcast-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .broadcast-step {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background: var(--gradient);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .step-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .copy-box {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .broadcast-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .broadcast-tab {
+            padding: 0.75rem 1rem;
+            border: none;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .broadcast-tab.active {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Enhanced Watermark Styles */
+        .watermark-settings {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .watermark-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+        }
+
+        .watermark-option:not(:last-child) {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Platform-specific warning improvements */
+        .platform-warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid #ffc107;
+            display: none;
+        }
+
+        .dark-mode .platform-warning {
+            background: #332701;
+            color: #ffd700;
+            border-left-color: #ffd700;
+        }
+
+        /* Enhanced share options with platform indicators */
+        .share-option.warning-platform {
+            position: relative;
+        }
+
+        .share-option.warning-platform::after {
+            content: '⚠️';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 0.7rem;
+            background: #ffc107;
+            color: #000;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dark-mode .share-option.warning-platform::after {
+            color: #000;
+        }
+
+        /* App Link Styling */
+        .app-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--primary-color);
+            cursor: help;
+            font-weight: 600;
         }
 
         /* Tablet and Desktop Styles */
@@ -741,6 +1489,10 @@
                 flex-direction: row;
             }
 
+            .action-buttons-row {
+                flex-direction: row;
+            }
+
             .btn {
                 width: auto;
             }
@@ -750,22 +1502,17 @@
             }
 
             .share-options-grid {
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
 
             .share-option.device-share {
-                grid-column: span 2;
+                grid-column: span 1;
             }
 
             .section-header {
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
-            }
-
-            .form-grid {
-                grid-template-columns: 2fr 1fr 1fr auto;
-                gap: 0.75rem;
             }
         }
 
@@ -808,6 +1555,12 @@
                         <i class="fas fa-sun"></i>
                     </button>
                 </div>
+            </div>
+            
+            <!-- Mode Indicator -->
+            <div class="mode-indicator auto" id="modeIndicator">
+                <span id="modeText">Auto Mode</span>
+                <span class="countdown" id="countdown"></span>
             </div>
             
             <!-- Horizontal Scroll Time Periods -->
@@ -865,7 +1618,7 @@
                             Display Mode
                         </label>
                         <select class="control-select" id="displayModeSelect">
-                            <option value="auto">Auto</option>
+                            <option value="auto">Auto (Time-based)</option>
                             <option value="morning">Morning</option>
                             <option value="day">Day</option>
                             <option value="afternoon">Afternoon</option>
@@ -942,14 +1695,26 @@
 
                 <!-- Action Buttons -->
                 <div class="action-buttons">
-                    <button class="btn btn-primary" id="nextVerse">
-                        <i class="fas fa-random"></i>
-                        Next Verse
-                    </button>
-                    <button class="btn btn-secondary" id="shareButton">
-                        <i class="fas fa-share-alt"></i>
-                        Share
-                    </button>
+                    <div class="action-buttons-row">
+                        <button class="btn btn-secondary" id="previousVerse">
+                            <i class="fas fa-arrow-left"></i>
+                            Previous Verse
+                        </button>
+                        <button class="btn btn-primary" id="nextVerse">
+                            <i class="fas fa-arrow-right"></i>
+                            Next Verse
+                        </button>
+                    </div>
+                    <div class="action-buttons-row">
+                        <button class="btn btn-secondary" id="shareButton">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                        <button class="btn btn-outline" id="scheduleButton">
+                            <i class="fas fa-clock"></i>
+                            Set Reminder
+                        </button>
+                    </div>
                 </div>
             </section>
 
@@ -995,6 +1760,136 @@
                 </div>
             </section>
 
+            <!-- NEW: Share History as Collapsible Section -->
+            <section class="collapsible-section">
+                <button class="collapsible-btn" id="toggleHistory">
+                    <span>
+                        <i class="fas fa-history"></i>
+                        Share History
+                    </span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="collapsible-content" id="historyContent">
+                    <div class="history-header">
+                        <h3>Recent Shares</h3>
+                        <button class="btn btn-outline" id="clearHistoryBtn">
+                            <i class="fas fa-trash"></i>
+                            Clear All
+                        </button>
+                    </div>
+                    <div class="history-list" id="historyList">
+                        <!-- History items will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- NEW: WhatsApp Broadcast as Button -->
+            <button class="btn btn-outline" id="toggleBroadcast" style="width: 100%; margin-bottom: 1.5rem;">
+                <i class="fab fa-whatsapp"></i>
+                WhatsApp Broadcast Assistant
+            </button>
+
+            <!-- Broadcast Section (Hidden by Default) -->
+            <div class="broadcast-section" id="broadcastSection" style="display: none;">
+                <div class="broadcast-tabs">
+                    <button class="broadcast-tab active" data-tab="guide">Broadcast Guide</button>
+                    <button class="broadcast-tab" data-tab="contacts">Contact Management</button>
+                </div>
+                
+                <div class="tab-content active" id="guideTab">
+                    <div class="broadcast-steps">
+                        <div class="broadcast-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="step-title">Prepare Your Verse</div>
+                                <div class="step-description">
+                                    Copy the verse text with reference. Recipients will receive the text with attribution.
+                                </div>
+                                <div class="copy-box" id="verseCopyBox">
+                                    "The steadfast love of the LORD never ceases; his mercies never come to an end; they are new every morning; great is your faithfulness." - Lamentations 3:22-23
+                                    <button class="copy-btn" id="copyVerseForBroadcast">Copy</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="broadcast-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="step-title">Open WhatsApp Broadcast</div>
+                                <div class="step-description">
+                                    In WhatsApp, tap the three dots (⋮) → New broadcast
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="broadcast-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="step-title">Select Recipients</div>
+                                <div class="step-description">
+                                    Choose up to 256 contacts from your phone's contact list
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="broadcast-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="step-title">Paste and Send</div>
+                                <div class="step-description">
+                                    Paste the verse and add a personal message if desired. Send to all recipients at once.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="contactsTab">
+                    <h4>Managing Your Phone Contacts for Broadcasts</h4>
+                    <div class="broadcast-steps">
+                        <div class="broadcast-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="step-title">Save Contacts in Your Phone</div>
+                                <div class="step-description">
+                                    In your phone's contacts app, save recipients with "VerseCurator" in their name for easy identification.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="broadcast-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="step-title">Create WhatsApp Broadcast List</div>
+                                <div class="step-description">
+                                    In WhatsApp, create a broadcast list called "VerseCurator Recipients" to organize your verse sharing.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="broadcast-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="step-title">Regular Contact Maintenance</div>
+                                <div class="step-description">
+                                    Periodically update your phone's contact list and remove inactive numbers to maintain engagement.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="broadcast-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="step-title">Respect Privacy</div>
+                                <div class="step-description">
+                                    Only share with contacts who have explicitly opted in to receive Bible verses. Respect privacy preferences.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Custom Verses Section -->
             <section class="custom-section">
                 <div class="section-header">
@@ -1014,7 +1909,7 @@
                             <textarea class="form-input" id="customVerseText" placeholder="Enter verse text..." rows="3"></textarea>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-input" id="customVerseRef" placeholder="Reference">
+                            <input type="text" class="form-input" id="customVerseRef" placeholder="Reference"></input>
                         </div>
                         <div class="form-group">
                             <select class="form-input" id="customVerseTime">
@@ -1042,6 +1937,106 @@
         </main>
     </div>
 
+    <!-- Rate Button -->
+    <button class="rate-button" id="rateButton">
+        ⭐ Rate VerseCurator
+    </button>
+
+    <!-- Rating Modal -->
+    <div class="rating-modal" id="ratingModal">
+        <div class="rating-content">
+            <h3>Rate VerseCurator</h3>
+            <p>How would you rate your experience with our app?</p>
+            
+            <div class="rating-stars">
+                <span class="rating-star" data-rating="1">★</span>
+                <span class="rating-star" data-rating="2">★</span>
+                <span class="rating-star" data-rating="3">★</span>
+                <span class="rating-star" data-rating="4">★</span>
+                <span class="rating-star" data-rating="5">★</span>
+            </div>
+            
+            <textarea 
+                class="rating-comment" 
+                placeholder="Optional: Share your feedback..."
+                id="ratingCommentInput"
+            ></textarea>
+            
+            <div class="rating-actions">
+                <button class="rating-btn rating-cancel" id="ratingCancel">Cancel</button>
+                <button class="rating-btn rating-submit" id="ratingSubmit">Submit Rating</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Warning Modal -->
+    <div class="warning-modal" id="warningModal">
+        <div class="warning-content">
+            <div class="warning-icon">⚠️</div>
+            <h3>Text Sharing Limitation</h3>
+            <p>Text sharing may not work properly on this platform. We recommend using Image sharing for better results.</p>
+            
+            <div class="warning-actions">
+                <button class="warning-btn warning-primary" id="shareAsImage">Share as Image</button>
+                <button class="warning-btn warning-secondary" id="tryTextAnyway">Try Text Anyway</button>
+                <button class="warning-btn warning-outline" id="cancelShare">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schedule Modal -->
+    <div class="schedule-modal" id="scheduleModal">
+        <div class="schedule-content">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-clock"></i>
+                    Set Reminder
+                </h3>
+                <button class="modal-close" id="closeScheduleModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Choose when to be reminded to share this verse:</p>
+                
+                <div class="schedule-options">
+                    <div class="schedule-option" data-time="morning">
+                        <strong>Morning</strong>
+                        <small>5AM - 12PM</small>
+                    </div>
+                    <div class="schedule-option" data-time="day">
+                        <strong>Day</strong>
+                        <small>12PM - 3PM</small>
+                    </div>
+                    <div class="schedule-option" data-time="afternoon">
+                        <strong>Afternoon</strong>
+                        <small>3PM - 6PM</small>
+                    </div>
+                    <div class="schedule-option" data-time="evening">
+                        <strong>Evening</strong>
+                        <small>6PM - 10PM</small>
+                    </div>
+                    <div class="schedule-option" data-time="night">
+                        <strong>Night</strong>
+                        <small>10PM - 5AM</small>
+                    </div>
+                    <div class="schedule-option" data-time="custom">
+                        <strong>Custom Time</strong>
+                    </div>
+                </div>
+
+                <div class="custom-time" id="customTimeInput" style="display: none;">
+                    <input type="time" class="time-input" id="customTime">
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" id="cancelSchedule">Cancel</button>
+                    <button class="btn btn-primary" id="setReminder">Set Reminder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Share Modal -->
     <div class="modal" id="shareModal">
         <div class="modal-content">
@@ -1055,36 +2050,71 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="share-options-grid">
-                    <button class="share-option" id="copyText">
+                <!-- Share Type Selection -->
+                <div class="share-type-selection">
+                    <button class="share-type-btn active" data-type="text">Text</button>
+                    <button class="share-type-btn" data-type="image">Image</button>
+                </div>
+
+                <!-- Theme Selection (for image sharing) -->
+                <div class="theme-selection" id="themeSelection" style="display: none;">
+                    <div class="theme-options">
+                        <label>Themes:</label>
+                        <select id="imageTheme">
+                            <option value="classic">Classic</option>
+                            <option value="parchment">Parchment</option>
+                            <option value="nature">Nature</option>
+                            <option value="dark">Dark</option>
+                            <option value="colorful">Colorful</option>
+                            <option value="sunrise">Sunrise</option>
+                        </select>
+                    </div>
+                    <div class="theme-preview" id="themePreview">
+                        <canvas id="previewCanvas" width="300" height="158"></canvas>
+                    </div>
+                    <div class="image-actions">
+                        <button class="share-action-btn" id="downloadImage">Download Image</button>
+                        <button class="share-action-btn" id="shareImage">Share Image</button>
+                    </div>
+                </div>
+
+                <div class="share-options-grid" id="textShareOptions">
+                    <!-- Text Sharing Options -->
+                    <button class="share-option share-with-link" id="copyText">
                         <div class="share-icon">
                             <i class="fas fa-copy"></i>
                         </div>
-                        <span>Copy</span>
+                        <span>Copy Text</span>
                     </button>
-                    <button class="share-option" id="shareTwitter">
-                        <div class="share-icon">
-                            <i class="fab fa-twitter"></i>
-                        </div>
-                        <span>Twitter</span>
-                    </button>
-                    <button class="share-option" id="shareWhatsApp">
+                    <button class="share-option share-with-link" id="shareWhatsApp">
                         <div class="share-icon">
                             <i class="fab fa-whatsapp"></i>
                         </div>
                         <span>WhatsApp</span>
                     </button>
-                    <button class="share-option" id="shareEmail">
+                    <button class="share-option share-with-link" id="shareEmail">
                         <div class="share-icon">
                             <i class="fas fa-envelope"></i>
                         </div>
                         <span>Email</span>
                     </button>
-                    <button class="share-option" id="downloadImage">
+                    <button class="share-option share-with-link" id="shareSMS">
                         <div class="share-icon">
-                            <i class="fas fa-download"></i>
+                            <i class="fas fa-comment-sms"></i>
                         </div>
-                        <span>Download</span>
+                        <span>SMS</span>
+                    </button>
+                    <button class="share-option warning-platform" id="shareFacebook">
+                        <div class="share-icon">
+                            <i class="fab fa-facebook"></i>
+                        </div>
+                        <span>Facebook</span>
+                    </button>
+                    <button class="share-option warning-platform" id="shareInstagram">
+                        <div class="share-icon">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <span>Instagram</span>
                     </button>
                     <button class="share-option device-share" id="shareDevice">
                         <div class="share-icon">
@@ -1123,10 +2153,12 @@
     <canvas id="verseCanvas" style="display: none;"></canvas>
 
     <script>
-        // Mobile-optimized JavaScript (same as previous but with console logs removed for brevity)
+        // VerseCurator - Complete Mobile-Optimized App with Enhanced Features
         class VerseCurator {
             constructor() {
                 this.currentVerse = null;
+                this.verseHistory = [];
+                this.currentHistoryIndex = -1;
                 this.customVerses = JSON.parse(localStorage.getItem('customVerses')) || [];
                 this.favorites = JSON.parse(localStorage.getItem('favoriteVerses')) || [];
                 this.notes = JSON.parse(localStorage.getItem('verseNotes')) || [];
@@ -1135,7 +2167,8 @@
                     versesShared: 0,
                     versesFavorited: 0,
                     currentStreak: 0,
-                    lastVisit: null
+                    lastVisit: null,
+                    ratingsSubmitted: 0
                 };
                 
                 this.userPreferences = JSON.parse(localStorage.getItem('userPreferences')) || {
@@ -1146,31 +2179,69 @@
                     theme: 'light'
                 };
 
+                // NEW: Share History Storage
+                this.shareHistory = JSON.parse(localStorage.getItem('shareHistory')) || [];
+                this.maxHistoryItems = 15;
+
+                // Mode management
+                this.currentMode = 'auto';
+                this.manualTimeout = null;
+                this.countdownInterval = null;
+                this.autoRotateInterval = null;
+
+                // Rating system
+                this.userRating = 0;
+                this.ratingSubmitted = false;
+                this.currentShareType = 'text';
+
+                // Warning system
+                this.pendingShareAction = null;
+
+                // Timezone handling
+                this.userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+                // Initialize managers
+                this.rateButtonManager = new RateButtonManager();
+                this.imageGenerator = new ImageGenerator();
+                this.historyManager = new HistoryManager();
+                this.broadcastManager = new BroadcastManager();
+
+                // Platform warnings - ONLY these platforms show warnings
+                this.WARNING_PLATFORMS = ['facebook', 'instagram', 'tiktok', 'snapchat'];
+
                 this.bibleVerses = {
                     morning: {
                         ESV: [
                             { text: "The steadfast love of the LORD never ceases; his mercies never come to an end; they are new every morning; great is your faithfulness.", reference: "Lamentations 3:22-23" },
-                            { text: "This is the day that the LORD has made; let us rejoice and be glad in it.", reference: "Psalm 118:24" }
+                            { text: "This is the day that the LORD has made; let us rejoice and be glad in it.", reference: "Psalm 118:24" },
+                            { text: "Let me hear in the morning of your steadfast love, for in you I trust. Make me know the way I should go, for to you I lift up my soul.", reference: "Psalm 143:8" }
+                        ],
+                        NIV: [
+                            { text: "Because of the LORD's great love we are not consumed, for his compassions never fail. They are new every morning; great is your faithfulness.", reference: "Lamentations 3:22-23" }
                         ]
                     },
                     day: {
                         ESV: [
-                            { text: "But they who wait for the LORD shall renew their strength; they shall mount up with wings like eagles; they shall run and not be weary; they shall walk and not faint.", reference: "Isaiah 40:31" }
+                            { text: "But they who wait for the LORD shall renew their strength; they shall mount up with wings like eagles; they shall run and not be weary; they shall walk and not faint.", reference: "Isaiah 40:31" },
+                            { text: "The LORD is my light and my salvation; whom shall I fear? The LORD is the stronghold of my life; of whom shall I be afraid?", reference: "Psalm 27:1" }
                         ]
                     },
                     afternoon: {
                         ESV: [
-                            { text: "And let us not grow weary of doing good, for in due season we will reap, if we do not give up.", reference: "Galatians 6:9" }
+                            { text: "And let us not grow weary of doing good, for in due season we will reap, if we do not give up.", reference: "Galatians 6:9" },
+                            { text: "Cast all your anxiety on him because he cares for you.", reference: "1 Peter 5:7" }
                         ]
                     },
                     evening: {
                         ESV: [
-                            { text: "In peace I will both lie down and sleep; for you alone, O LORD, make me dwell in safety.", reference: "Psalm 4:8" }
+                            { text: "In peace I will both lie down and sleep; for you alone, O LORD, make me dwell in safety.", reference: "Psalm 4:8" },
+                            { text: "The sun shall not strike you by day, nor the moon by night.", reference: "Psalm 121:6" }
                         ]
                     },
                     night: {
                         ESV: [
-                            { text: "When I remember you upon my bed, and meditate on you in the watches of the night.", reference: "Psalm 63:6" }
+                            { text: "When I remember you upon my bed, and meditate on you in the watches of the night.", reference: "Psalm 63:6" },
+                            { text: "Be angry and do not sin; ponder in your own hearts on your beds, and be silent.", reference: "Psalm 4:4" }
                         ]
                     }
                 };
@@ -1185,64 +2256,327 @@
                 this.updateStats();
                 this.loadCustomVerses();
                 this.checkVisitStreak();
-                
-                setInterval(() => this.updateTimeDisplay(), 1000);
-                setInterval(() => this.autoRotateVerse(), 30000);
+                this.setupShareTypeSelection();
+                this.startAutoRotation();
+                this.setupEnhancedFeatures();
                 
                 this.displayRandomVerse();
+                this.historyManager.loadHistory();
+            }
+
+            // NEW: Enhanced features setup
+            setupEnhancedFeatures() {
+                // Share history collapsible
+                document.getElementById('toggleHistory').addEventListener('click', () => this.toggleHistory());
+                
+                // Broadcast section toggle
+                document.getElementById('toggleBroadcast').addEventListener('click', () => this.toggleBroadcast());
+                
+                // Share history clear
+                document.getElementById('clearHistoryBtn').addEventListener('click', () => this.historyManager.clearHistory());
+                
+                // Broadcast tabs
+                document.querySelectorAll('.broadcast-tab').forEach(tab => {
+                    tab.addEventListener('click', (e) => this.broadcastManager.switchTab(e.target.dataset.tab));
+                });
+                
+                // Copy verse for broadcast
+                document.getElementById('copyVerseForBroadcast').addEventListener('click', () => this.broadcastManager.copyVerseForBroadcast());
+                
+                // Enhanced share platform detection
+                this.setupEnhancedShareWarnings();
+            }
+
+            // NEW: Enhanced share warnings - only for specific platforms
+            setupEnhancedShareWarnings() {
+                // Add warning indicators to problematic platforms
+                document.querySelectorAll('.share-option').forEach(option => {
+                    const platform = option.id.replace('share', '').toLowerCase();
+                    if (this.WARNING_PLATFORMS.includes(platform)) {
+                        option.classList.add('warning-platform');
+                    }
+                });
+
+                // Set up individual platform handlers
+                document.getElementById('shareFacebook').addEventListener('click', () => this.shareOnFacebook());
+                document.getElementById('shareInstagram').addEventListener('click', () => this.shareOnInstagram());
+            }
+
+            // NEW: Toggle history section
+            toggleHistory() {
+                const historyBtn = document.getElementById('toggleHistory');
+                const historyContent = document.getElementById('historyContent');
+                
+                historyBtn.classList.toggle('active');
+                if (historyContent.style.display === 'block') {
+                    historyContent.style.display = 'none';
+                } else {
+                    historyContent.style.display = 'block';
+                }
+            }
+
+            // NEW: Toggle broadcast section
+            toggleBroadcast() {
+                const broadcastSection = document.getElementById('broadcastSection');
+                if (broadcastSection.style.display === 'none') {
+                    broadcastSection.style.display = 'block';
+                    this.updateBroadcastCopyBox();
+                } else {
+                    broadcastSection.style.display = 'none';
+                }
             }
 
             setupEventListeners() {
-                // All event listeners remain the same as previous version
+                // Theme toggle
                 document.getElementById('themeToggle').addEventListener('click', () => this.toggleTheme());
+                
+                // Main actions
                 document.getElementById('nextVerse').addEventListener('click', () => this.displayRandomVerse());
+                document.getElementById('previousVerse').addEventListener('click', () => this.showPreviousVerse());
                 document.getElementById('shareButton').addEventListener('click', () => this.showShareModal());
+                document.getElementById('scheduleButton').addEventListener('click', () => this.showScheduleModal());
+                
+                // Settings changes
                 document.getElementById('translationSelect').addEventListener('change', (e) => this.savePreference('translation', e.target.value));
-                document.getElementById('displayModeSelect').addEventListener('change', (e) => this.savePreference('displayMode', e.target.value));
+                document.getElementById('displayModeSelect').addEventListener('change', (e) => this.handleDisplayModeChange(e.target.value));
                 document.getElementById('canvasStyleSelect').addEventListener('change', (e) => this.savePreference('canvasStyle', e.target.value));
                 document.getElementById('appModeSelect').addEventListener('change', (e) => this.handleAppModeChange(e.target.value));
                 document.getElementById('occasionSelect').addEventListener('change', (e) => this.savePreference('occasion', e.target.value));
+                
+                // Custom verses
                 document.getElementById('toggleCustomForm').addEventListener('click', () => this.toggleCustomForm());
                 document.getElementById('addCustomVerse').addEventListener('click', () => this.addCustomVerse());
+                
+                // Verse actions
                 document.getElementById('favoriteVerse').addEventListener('click', () => this.toggleFavorite());
                 document.getElementById('addNote').addEventListener('click', () => this.showNoteModal());
+                
+                // Modal events
                 document.getElementById('closeModal').addEventListener('click', () => this.hideShareModal());
                 document.getElementById('closeNoteModal').addEventListener('click', () => this.hideNoteModal());
                 document.getElementById('cancelNote').addEventListener('click', () => this.hideNoteModal());
                 document.getElementById('saveNote').addEventListener('click', () => this.saveNote());
+                
+                // Share options
                 document.getElementById('copyText').addEventListener('click', () => this.copyVerseToClipboard());
-                document.getElementById('shareTwitter').addEventListener('click', () => this.shareOnTwitter());
                 document.getElementById('shareWhatsApp').addEventListener('click', () => this.shareOnWhatsApp());
                 document.getElementById('shareEmail').addEventListener('click', () => this.shareViaEmail());
+                document.getElementById('shareSMS').addEventListener('click', () => this.shareViaSMS());
                 document.getElementById('downloadImage').addEventListener('click', () => this.downloadVerseAsImage());
+                document.getElementById('shareImage').addEventListener('click', () => this.shareVerseImage());
                 document.getElementById('shareDevice').addEventListener('click', () => this.shareViaDevice());
 
+                // Warning modal actions
+                document.getElementById('shareAsImage').addEventListener('click', () => this.handleShareAsImage());
+                document.getElementById('tryTextAnyway').addEventListener('click', () => this.handleTryTextAnyway());
+                document.getElementById('cancelShare').addEventListener('click', () => this.hideWarningModal());
+
+                // Schedule modal actions
+                document.getElementById('closeScheduleModal').addEventListener('click', () => this.hideScheduleModal());
+                document.getElementById('cancelSchedule').addEventListener('click', () => this.hideScheduleModal());
+                document.getElementById('setReminder').addEventListener('click', () => this.setReminder());
+
+                // Schedule options
+                document.querySelectorAll('.schedule-option').forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        this.handleScheduleOptionClick(e.currentTarget);
+                    });
+                });
+
+                // Close modals on outside click
                 window.addEventListener('click', (e) => {
                     if (e.target.classList.contains('modal')) {
                         this.hideShareModal();
                         this.hideNoteModal();
+                        this.hideWarningModal();
+                        this.hideScheduleModal();
                     }
                 });
 
+                // Time period indicators
                 document.querySelectorAll('.period').forEach(period => {
                     period.addEventListener('click', (e) => {
-                        this.setTimePeriod(e.currentTarget.dataset.period);
+                        this.setManualMode(e.currentTarget.dataset.period);
                     });
+                });
+
+                // Share type selection
+                document.querySelectorAll('.share-type-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const type = e.target.dataset.type;
+                        this.handleShareTypeChange(type);
+                    });
+                });
+
+                // Image theme change
+                document.getElementById('imageTheme').addEventListener('change', () => {
+                    this.updateThemePreview();
                 });
             }
 
-            // All other methods remain the same as previous version
-            updateTimeDisplay() {
-                const now = new Date();
-                const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: true };
-                const dateOptions = { weekday: 'short', month: 'short', day: 'numeric' };
+            // Previous Verse Functionality
+            addToHistory(verse) {
+                // Remove duplicates
+                this.verseHistory = this.verseHistory.filter(v => 
+                    !(v.text === verse.text && v.reference === verse.reference)
+                );
                 
-                // For mobile, we'll show time in header if needed
-                // Current implementation hides time on mobile to save space
+                // Add to beginning of history
+                this.verseHistory.unshift(verse);
+                
+                // Keep only last 10 verses
+                if (this.verseHistory.length > 10) {
+                    this.verseHistory = this.verseHistory.slice(0, 10);
+                }
+                
+                // Reset history index
+                this.currentHistoryIndex = -1;
+            }
+
+            showPreviousVerse() {
+                if (this.verseHistory.length === 0) {
+                    this.showNotification('No previous verses available');
+                    return;
+                }
+                
+                // Move to next verse in history
+                this.currentHistoryIndex++;
+                
+                // If at end of history, loop back to current
+                if (this.currentHistoryIndex >= this.verseHistory.length) {
+                    this.currentHistoryIndex = -1;
+                    this.displayRandomVerse();
+                    return;
+                }
+                
+                // Show verse from history
+                this.currentVerse = this.verseHistory[this.currentHistoryIndex];
+                this.updateVerseDisplay();
+                this.incrementStat('versesViewed');
+            }
+
+            // Mode Management
+            handleDisplayModeChange(mode) {
+                if (mode === 'auto') {
+                    this.setAutoMode();
+                } else {
+                    this.setManualMode(mode);
+                }
+            }
+
+            setAutoMode() {
+                this.currentMode = 'auto';
+                this.userPreferences.displayMode = 'auto';
+                this.updateModeIndicator();
+                this.clearManualTimeout();
+                this.startAutoRotation();
+                this.displayRandomVerse();
+                this.savePreference('displayMode', 'auto');
+            }
+
+            setManualMode(period) {
+                this.currentMode = 'manual';
+                this.userPreferences.displayMode = period;
+                this.updateModeIndicator();
+                this.startManualTimeout();
+                this.stopAutoRotation();
+                this.displayRandomVerse();
+                this.savePreference('displayMode', period);
+            }
+
+            startManualTimeout() {
+                this.clearManualTimeout();
+                
+                let secondsLeft = 60;
+                this.updateCountdown(secondsLeft);
+                
+                this.countdownInterval = setInterval(() => {
+                    secondsLeft--;
+                    this.updateCountdown(secondsLeft);
+                    
+                    if (secondsLeft <= 0) {
+                        this.setAutoMode();
+                    }
+                }, 1000);
+
+                this.manualTimeout = setTimeout(() => {
+                    this.setAutoMode();
+                }, 60000);
+            }
+
+            clearManualTimeout() {
+                if (this.manualTimeout) {
+                    clearTimeout(this.manualTimeout);
+                    this.manualTimeout = null;
+                }
+                if (this.countdownInterval) {
+                    clearInterval(this.countdownInterval);
+                    this.countdownInterval = null;
+                }
+                this.updateCountdown(null);
+            }
+
+            updateCountdown(seconds) {
+                const countdownEl = document.getElementById('countdown');
+                if (seconds === null) {
+                    countdownEl.textContent = '';
+                } else {
+                    countdownEl.textContent = `(${seconds}s)`;
+                }
+            }
+
+            updateModeIndicator() {
+                const indicator = document.getElementById('modeIndicator');
+                const modeText = document.getElementById('modeText');
+                
+                if (this.currentMode === 'auto') {
+                    indicator.className = 'mode-indicator auto';
+                    const currentPeriod = this.getCurrentTimePeriod();
+                    const periodNames = {
+                        morning: '🌅 Morning',
+                        day: '☀️ Day',
+                        afternoon: '🌇 Afternoon', 
+                        evening: '🌆 Evening',
+                        night: '🌙 Night'
+                    };
+                    modeText.textContent = `Auto - ${periodNames[currentPeriod]}`;
+                } else {
+                    indicator.className = 'mode-indicator manual';
+                    const periodNames = {
+                        morning: '🌅 Morning',
+                        day: '☀️ Day',
+                        afternoon: '🌇 Afternoon',
+                        evening: '🌆 Evening',
+                        night: '🌙 Night'
+                    };
+                    modeText.textContent = `Manual - ${periodNames[this.userPreferences.displayMode]}`;
+                }
+            }
+
+            startAutoRotation() {
+                this.stopAutoRotation();
+                this.autoRotateInterval = setInterval(() => {
+                    if (this.currentMode === 'auto') {
+                        this.displayRandomVerse();
+                    }
+                }, 30000);
+            }
+
+            stopAutoRotation() {
+                if (this.autoRotateInterval) {
+                    clearInterval(this.autoRotateInterval);
+                    this.autoRotateInterval = null;
+                }
+            }
+
+            // Time and Display Functions
+            updateTimeDisplay() {
+                // Time display hidden on mobile to save space
             }
 
             getCurrentTimePeriod() {
                 const hour = new Date().getHours();
+                
                 if (hour >= 5 && hour < 12) return 'morning';
                 if (hour >= 12 && hour < 15) return 'day';
                 if (hour >= 15 && hour < 18) return 'afternoon';
@@ -1251,32 +2585,23 @@
             }
 
             updateTimePeriodIndicator() {
-                const currentPeriod = this.getCurrentTimePeriod();
+                const currentPeriod = this.currentMode === 'auto' ? this.getCurrentTimePeriod() : this.userPreferences.displayMode;
                 document.querySelectorAll('.period').forEach(period => {
                     period.classList.toggle('active', period.dataset.period === currentPeriod);
                 });
-                
-                const periodNames = {
-                    morning: '🌅 Morning',
-                    day: '☀️ Day', 
-                    afternoon: '🌇 Afternoon',
-                    evening: '🌆 Evening',
-                    night: '🌙 Night'
-                };
-                
-                document.getElementById('verseTimeBadge').textContent = periodNames[currentPeriod];
             }
 
-            setTimePeriod(period) {
-                this.savePreference('displayMode', period);
-                this.displayRandomVerse();
-            }
-
+            // Verse Management
             displayRandomVerse() {
-                const displayMode = this.userPreferences.displayMode;
-                const timePeriod = displayMode === 'auto' ? this.getCurrentTimePeriod() : displayMode;
-                const translation = this.userPreferences.translation;
+                let timePeriod;
                 
+                if (this.currentMode === 'auto') {
+                    timePeriod = this.getCurrentTimePeriod();
+                } else {
+                    timePeriod = this.userPreferences.displayMode;
+                }
+                
+                const translation = this.userPreferences.translation;
                 let verses = this.getVersesForPeriod(timePeriod, translation);
                 
                 if (verses.length === 0) {
@@ -1286,8 +2611,34 @@
                 const randomIndex = Math.floor(Math.random() * verses.length);
                 this.currentVerse = verses[randomIndex];
                 
+                // Add to history for previous button
+                this.addToHistory({...this.currentVerse});
+                
                 this.updateVerseDisplay();
+                this.updateTimePeriodIndicator();
+                this.updateModeIndicator();
                 this.incrementStat('versesViewed');
+                
+                // Track view for rate button
+                this.rateButtonManager.trackView();
+
+                // Update broadcast copy box
+                this.updateBroadcastCopyBox();
+            }
+
+            updateBroadcastCopyBox() {
+                if (!this.currentVerse) return;
+                
+                const verseText = `"${this.currentVerse.text}" - ${this.currentVerse.reference}`;
+                const copyBox = document.getElementById('verseCopyBox');
+                if (copyBox) {
+                    // Sender sees clean text only
+                    copyBox.innerHTML = verseText + 
+                        '<button class="copy-btn" id="copyVerseForBroadcast">Copy</button>';
+                    
+                    // Re-attach event listener
+                    document.getElementById('copyVerseForBroadcast').addEventListener('click', () => this.broadcastManager.copyVerseForBroadcast());
+                }
             }
 
             getVersesForPeriod(period, translation) {
@@ -1310,6 +2661,7 @@
                 document.getElementById('verseReference').textContent = this.currentVerse.reference;
                 document.getElementById('verseTranslationBadge').textContent = this.currentVerse.translation;
                 
+                // Update favorite button
                 const isFavorite = this.favorites.some(fav => 
                     fav.text === this.currentVerse.text && fav.reference === this.currentVerse.reference
                 );
@@ -1319,14 +2671,25 @@
                     '<i class="fas fa-heart"></i>' : 
                     '<i class="far fa-heart"></i>';
                 favoriteBtn.style.color = isFavorite ? '#e74c3c' : '';
-            }
 
-            autoRotateVerse() {
-                if (this.userPreferences.displayMode === 'auto') {
-                    this.displayRandomVerse();
+                // Update time badge based on current mode
+                const timeBadge = document.getElementById('verseTimeBadge');
+                const periodNames = {
+                    morning: '🌅 Morning',
+                    day: '☀️ Day',
+                    afternoon: '🌇 Afternoon',
+                    evening: '🌆 Evening',
+                    night: '🌙 Night'
+                };
+                
+                if (this.currentMode === 'auto') {
+                    timeBadge.textContent = periodNames[this.getCurrentTimePeriod()];
+                } else {
+                    timeBadge.textContent = periodNames[this.userPreferences.displayMode];
                 }
             }
 
+            // Custom Verses
             toggleCustomForm() {
                 const form = document.getElementById('customForm');
                 form.style.display = form.style.display === 'none' ? 'block' : 'none';
@@ -1384,6 +2747,7 @@
                 this.showNotification('Verse deleted');
             }
 
+            // Favorites and Notes
             toggleFavorite() {
                 if (!this.currentVerse) return;
                 
@@ -1448,6 +2812,347 @@
                 this.showNotification(noteText ? 'Note saved!' : 'Note removed');
             }
 
+            // Enhanced Share System
+            setupShareTypeSelection() {
+                // Initial setup handled in main event listeners
+            }
+
+            handleShareTypeChange(type) {
+                this.currentShareType = type;
+                const themeSelection = document.getElementById('themeSelection');
+                const textShareOptions = document.getElementById('textShareOptions');
+                
+                if (type === 'image') {
+                    themeSelection.style.display = 'block';
+                    textShareOptions.style.display = 'none';
+                    this.updateThemePreview();
+                } else {
+                    themeSelection.style.display = 'none';
+                    textShareOptions.style.display = 'grid';
+                }
+                
+                // Update active button
+                document.querySelectorAll('.share-type-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.type === type);
+                });
+            }
+
+            // Enhanced share methods that include app link for recipients only
+            getShareText() {
+                if (!this.currentVerse) return { senderText: '', receiverText: '' };
+                
+                const verseText = `"${this.currentVerse.text}" - ${this.currentVerse.reference}`;
+                const appLink = '\n\n📖 Shared via VerseCurator - Beautiful Bible verse curation\n👉 https://mashifmj-prog.github.io/VerseCurator/';
+                
+                return {
+                    senderText: verseText, // What sender sees (clean text)
+                    receiverText: verseText + appLink // What receiver gets (text + link)
+                };
+            }
+
+            // ENHANCED: All share methods now track history
+            copyVerseToClipboard() {
+                if (!this.currentVerse) return;
+                
+                const { receiverText } = this.getShareText();
+                navigator.clipboard.writeText(receiverText).then(() => {
+                    this.showNotification('Copied! Recipients will see text with app attribution');
+                    this.incrementStat('versesShared');
+                    // NEW: Add to share history
+                    this.historyManager.addToHistory(this.currentVerse, 'copy', true);
+                    this.hideShareModal();
+                }).catch(err => {
+                    this.showNotification('Failed to copy', 'error');
+                });
+            }
+
+            shareOnWhatsApp() {
+                if (!this.currentVerse) return;
+                const { receiverText } = this.getShareText();
+                const text = encodeURIComponent(receiverText);
+                window.open(`https://wa.me/?text=${text}`, '_blank');
+                this.incrementStat('versesShared');
+                // NEW: Add to share history
+                this.historyManager.addToHistory(this.currentVerse, 'whatsapp', true);
+                this.hideShareModal();
+            }
+
+            shareViaEmail() {
+                if (!this.currentVerse) return;
+                const { receiverText } = this.getShareText();
+                const subject = encodeURIComponent('Daily Bible Verse');
+                const body = encodeURIComponent(receiverText);
+                window.open(`mailto:?subject=${subject}&body=${body}`);
+                this.incrementStat('versesShared');
+                // NEW: Add to share history
+                this.historyManager.addToHistory(this.currentVerse, 'email', true);
+                this.hideShareModal();
+            }
+
+            shareViaSMS() {
+                if (!this.currentVerse) return;
+                const { receiverText } = this.getShareText();
+                const text = encodeURIComponent(receiverText);
+                window.open(`sms:?body=${text}`);
+                this.incrementStat('versesShared');
+                // NEW: Add to share history
+                this.historyManager.addToHistory(this.currentVerse, 'sms', true);
+                this.hideShareModal();
+            }
+
+            // NEW: Platform-specific share methods with warnings
+            shareOnFacebook() {
+                if (!this.currentVerse) return;
+                // Show warning for Facebook
+                this.pendingShareAction = 'facebook';
+                this.showWarningModal();
+            }
+
+            shareOnInstagram() {
+                if (!this.currentVerse) return;
+                // Show warning for Instagram
+                this.pendingShareAction = 'instagram';
+                this.showWarningModal();
+            }
+
+            shareViaDevice() {
+                if (!this.currentVerse) return;
+                
+                // NO WARNING for Device Share - goes directly to native share
+                this.executeDeviceShare();
+            }
+
+            // ENHANCED: Modified share methods to track history
+            async executeDeviceShare() {
+                if (!this.currentVerse) return;
+                
+                if (navigator.share) {
+                    const { receiverText } = this.getShareText();
+                    try {
+                        await navigator.share({
+                            title: 'Daily Bible Verse',
+                            text: receiverText,
+                            url: 'https://mashifmj-prog.github.io/VerseCurator/'
+                        });
+                        this.incrementStat('versesShared');
+                        // NEW: Add to share history
+                        this.historyManager.addToHistory(this.currentVerse, 'device', true);
+                    } catch (err) {
+                        // If share fails, fall back to copy
+                        this.copyVerseToClipboard();
+                    }
+                } else {
+                    // Fall back to copy if Web Share not supported
+                    this.copyVerseToClipboard();
+                }
+                this.hideShareModal();
+            }
+
+            // Warning Modal System
+            showWarningModal() {
+                document.getElementById('warningModal').style.display = 'block';
+            }
+
+            hideWarningModal() {
+                document.getElementById('warningModal').style.display = 'none';
+                this.pendingShareAction = null;
+            }
+
+            handleShareAsImage() {
+                this.hideWarningModal();
+                this.hideShareModal();
+                // Switch to image sharing
+                this.showShareModal();
+                this.handleShareTypeChange('image');
+            }
+
+            handleTryTextAnyway() {
+                const action = this.pendingShareAction;
+                this.hideWarningModal();
+                
+                if (action === 'facebook') {
+                    const { receiverText } = this.getShareText();
+                    const text = encodeURIComponent(receiverText);
+                    window.open(`https://www.facebook.com/sharer/sharer.php?u=https://mashifmj-prog.github.io/VerseCurator/&quote=${text}`, '_blank');
+                    this.incrementStat('versesShared');
+                    this.historyManager.addToHistory(this.currentVerse, 'facebook', true);
+                } else if (action === 'instagram') {
+                    // Instagram doesn't support direct sharing, open app
+                    this.showNotification('Please paste the copied text in Instagram');
+                    this.copyVerseToClipboard();
+                }
+                this.hideShareModal();
+            }
+
+            // ENHANCED: Image sharing with watermark options
+            async downloadVerseAsImage() {
+                if (!this.currentVerse) return;
+                
+                const theme = document.getElementById('imageTheme').value;
+                const includeWatermark = true; // Always include watermark for downloads
+                const imageData = await this.imageGenerator.generateImage(this.currentVerse, theme, includeWatermark);
+                
+                const link = document.createElement('a');
+                link.download = `verse-${this.currentVerse.reference.replace(' ', '-')}.png`;
+                link.href = imageData;
+                link.click();
+                
+                this.showNotification('Image downloaded! (With "Sourced via VerseCurator" watermark)');
+                this.incrementStat('versesShared');
+                // NEW: Add to share history
+                this.historyManager.addToHistory(this.currentVerse, 'image_download', true);
+                this.hideShareModal();
+            }
+
+            async shareVerseImage() {
+                if (!this.currentVerse) return;
+                
+                const theme = document.getElementById('imageTheme').value;
+                const includeWatermark = true; // Always include watermark for shares
+                const imageData = await this.imageGenerator.generateImage(this.currentVerse, theme, includeWatermark);
+                
+                // Convert base64 to blob
+                const response = await fetch(imageData);
+                const blob = await response.blob();
+                const file = new File([blob], `verse-${this.currentVerse.reference.replace(' ', '-')}.png`, { type: 'image/png' });
+                
+                if (navigator.share && navigator.canShare({ files: [file] })) {
+                    try {
+                        await navigator.share({
+                            files: [file],
+                            title: 'Bible Verse',
+                            text: `Check out this verse from ${this.currentVerse.reference}`
+                        });
+                        this.incrementStat('versesShared');
+                        // NEW: Add to share history
+                        this.historyManager.addToHistory(this.currentVerse, 'image_share', true);
+                    } catch (error) {
+                        console.log('Sharing failed:', error);
+                        this.downloadVerseAsImage(); // Fallback to download
+                    }
+                } else {
+                    // Fallback to download
+                    this.downloadVerseAsImage();
+                }
+                this.hideShareModal();
+            }
+
+            async updateThemePreview() {
+                if (!this.currentVerse) return;
+                
+                const theme = document.getElementById('imageTheme').value;
+                const previewCanvas = document.getElementById('previewCanvas');
+                const ctx = previewCanvas.getContext('2d');
+                
+                // Generate preview image
+                const imageData = await this.imageGenerator.generateImage(this.currentVerse, theme, true);
+                
+                const img = new Image();
+                img.onload = function() {
+                    ctx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+                    ctx.drawImage(img, 0, 0, previewCanvas.width, previewCanvas.height);
+                };
+                img.src = imageData;
+            }
+
+            // Schedule Sharing System
+            showScheduleModal() {
+                if (!this.currentVerse) return;
+                document.getElementById('scheduleModal').style.display = 'block';
+                // Reset selections
+                document.querySelectorAll('.schedule-option').forEach(opt => opt.classList.remove('active'));
+                document.getElementById('customTimeInput').style.display = 'none';
+            }
+
+            hideScheduleModal() {
+                document.getElementById('scheduleModal').style.display = 'none';
+            }
+
+            handleScheduleOptionClick(option) {
+                // Remove active class from all options
+                document.querySelectorAll('.schedule-option').forEach(opt => opt.classList.remove('active'));
+                // Add active class to clicked option
+                option.classList.add('active');
+                
+                // Show custom time input if custom is selected
+                if (option.dataset.time === 'custom') {
+                    document.getElementById('customTimeInput').style.display = 'block';
+                } else {
+                    document.getElementById('customTimeInput').style.display = 'none';
+                }
+            }
+
+            setReminder() {
+                const selectedOption = document.querySelector('.schedule-option.active');
+                if (!selectedOption) {
+                    this.showNotification('Please select a time', 'error');
+                    return;
+                }
+
+                const timeType = selectedOption.dataset.time;
+                let reminderTime;
+
+                if (timeType === 'custom') {
+                    const customTime = document.getElementById('customTime').value;
+                    if (!customTime) {
+                        this.showNotification('Please select a custom time', 'error');
+                        return;
+                    }
+                    reminderTime = customTime;
+                } else {
+                    // Set default times for each period
+                    const defaultTimes = {
+                        morning: '08:00',
+                        day: '12:00',
+                        afternoon: '15:00',
+                        evening: '18:00',
+                        night: '21:00'
+                    };
+                    reminderTime = defaultTimes[timeType];
+                }
+
+                this.createCalendarEvent(reminderTime);
+                this.hideScheduleModal();
+            }
+
+            createCalendarEvent(time) {
+                const now = new Date();
+                const [hours, minutes] = time.split(':');
+                const reminderDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), parseInt(hours), parseInt(minutes));
+                
+                // If the time has already passed today, set for tomorrow
+                if (reminderDate < now) {
+                    reminderDate.setDate(reminderDate.getDate() + 1);
+                }
+
+                const formattedDate = reminderDate.toISOString().replace(/-|:|\.\d+/g, '');
+                
+                const verseText = `"${this.currentVerse.text}" - ${this.currentVerse.reference}`;
+                const description = `Share this verse: ${verseText}\n\n📖 Via <span class="app-link" title="https://mashifmj-prog.github.io/VerseCurator/">VerseCurator App</span>`;
+                
+                // Create calendar event URL
+                const calendarUrl = [
+                    'BEGIN:VCALENDAR',
+                    'VERSION:2.0',
+                    'BEGIN:VEVENT',
+                    `DTSTART:${formattedDate}`,
+                    `DTEND:${formattedDate}`,
+                    `SUMMARY:Share Bible Verse - ${this.currentVerse.reference}`,
+                    `DESCRIPTION:${description.replace(/\n/g, '\\n')}`,
+                    'END:VEVENT',
+                    'END:VCALENDAR'
+                ].join('\n');
+                
+                const blob = new Blob([calendarUrl], { type: 'text/calendar;charset=utf-8' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'verse-reminder.ics';
+                link.click();
+                
+                this.showNotification('Reminder set! Check your calendar.');
+            }
+
+            // Preferences and Settings
             loadUserPreferences() {
                 if (this.userPreferences.theme === 'dark') {
                     document.body.classList.add('dark-mode');
@@ -1459,15 +3164,18 @@
                 document.getElementById('appModeSelect').value = this.userPreferences.appMode;
                 
                 this.handleAppModeChange(this.userPreferences.appMode);
+                
+                // Set initial mode
+                if (this.userPreferences.displayMode === 'auto') {
+                    this.setAutoMode();
+                } else {
+                    this.setManualMode(this.userPreferences.displayMode);
+                }
             }
 
             savePreference(key, value) {
                 this.userPreferences[key] = value;
                 localStorage.setItem('userPreferences', JSON.stringify(this.userPreferences));
-                
-                if (key === 'displayMode') {
-                    this.displayRandomVerse();
-                }
             }
 
             handleAppModeChange(mode) {
@@ -1486,6 +3194,7 @@
                 localStorage.setItem('userPreferences', JSON.stringify(this.userPreferences));
             }
 
+            // Stats Management
             updateStats() {
                 document.getElementById('versesViewed').textContent = this.stats.versesViewed;
                 document.getElementById('versesShared').textContent = this.stats.versesShared;
@@ -1494,6 +3203,9 @@
             }
 
             incrementStat(stat) {
+                if (!this.stats[stat]) {
+                    this.stats[stat] = 0;
+                }
                 this.stats[stat]++;
                 localStorage.setItem('appStats', JSON.stringify(this.stats));
                 this.updateStats();
@@ -1522,76 +3234,18 @@
                 this.updateStats();
             }
 
+            // Share Functions
             showShareModal() {
                 document.getElementById('shareModal').style.display = 'flex';
+                // Reset to text sharing by default
+                this.handleShareTypeChange('text');
             }
 
             hideShareModal() {
                 document.getElementById('shareModal').style.display = 'none';
             }
 
-            copyVerseToClipboard() {
-                if (!this.currentVerse) return;
-                
-                const textToCopy = `"${this.currentVerse.text}" - ${this.currentVerse.reference}`;
-                
-                navigator.clipboard.writeText(textToCopy).then(() => {
-                    this.showNotification('Copied to clipboard!');
-                    this.hideShareModal();
-                }).catch(err => {
-                    this.showNotification('Failed to copy', 'error');
-                });
-            }
-
-            shareOnTwitter() {
-                if (!this.currentVerse) return;
-                const text = encodeURIComponent(`"${this.currentVerse.text}" - ${this.currentVerse.reference}`);
-                window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
-                this.incrementStat('versesShared');
-                this.hideShareModal();
-            }
-
-            shareOnWhatsApp() {
-                if (!this.currentVerse) return;
-                const text = encodeURIComponent(`"${this.currentVerse.text}" - ${this.currentVerse.reference}`);
-                window.open(`https://wa.me/?text=${text}`, '_blank');
-                this.incrementStat('versesShared');
-                this.hideShareModal();
-            }
-
-            shareViaEmail() {
-                if (!this.currentVerse) return;
-                const subject = encodeURIComponent('Daily Bible Verse');
-                const body = encodeURIComponent(`"${this.currentVerse.text}"\n\n- ${this.currentVerse.reference}`);
-                window.open(`mailto:?subject=${subject}&body=${body}`);
-                this.incrementStat('versesShared');
-                this.hideShareModal();
-            }
-
-            shareViaDevice() {
-                if (!this.currentVerse) return;
-                
-                if (navigator.share) {
-                    navigator.share({
-                        title: 'Daily Bible Verse',
-                        text: `"${this.currentVerse.text}" - ${this.currentVerse.reference}`,
-                        url: window.location.href
-                    }).then(() => {
-                        this.incrementStat('versesShared');
-                    }).catch(err => {
-                        this.copyVerseToClipboard();
-                    });
-                } else {
-                    this.copyVerseToClipboard();
-                }
-                this.hideShareModal();
-            }
-
-            downloadVerseAsImage() {
-                this.showNotification('Image download coming soon!');
-                this.hideShareModal();
-            }
-
+            // Notification System
             showNotification(message, type = 'success') {
                 const existingNotification = document.querySelector('.notification');
                 if (existingNotification) {
@@ -1607,6 +3261,552 @@
                     notification.style.animation = 'slideOut 0.3s ease';
                     setTimeout(() => notification.remove(), 300);
                 }, 3000);
+            }
+        }
+
+        // NEW: Share History Manager
+        class HistoryManager {
+            constructor() {
+                this.history = JSON.parse(localStorage.getItem('shareHistory')) || [];
+                this.maxItems = 15;
+            }
+
+            addToHistory(verse, platform, success = true) {
+                const historyItem = {
+                    id: Date.now(),
+                    verse: verse.text,
+                    reference: verse.reference,
+                    platform: platform,
+                    timestamp: new Date().toISOString(),
+                    success: success
+                };
+
+                // Add to beginning of array (newest first)
+                this.history.unshift(historyItem);
+
+                // Limit to max items (FIFO)
+                if (this.history.length > this.maxItems) {
+                    this.history = this.history.slice(0, this.maxItems);
+                }
+
+                this.saveHistory();
+                this.loadHistory();
+            }
+
+            loadHistory() {
+                const historyList = document.getElementById('historyList');
+                if (!historyList) return;
+
+                if (this.history.length === 0) {
+                    historyList.innerHTML = `
+                        <div class="empty-history">
+                            <i class="fas fa-history" style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                            <p>No share history yet</p>
+                            <small>Your successful shares will appear here</small>
+                        </div>
+                    `;
+                    return;
+                }
+
+                historyList.innerHTML = this.history.map(item => `
+                    <div class="history-item">
+                        <div class="history-content">
+                            <div class="history-verse">"${this.truncateText(item.verse, 80)}"</div>
+                            <div class="history-details">
+                                <div class="history-platform">
+                                    <i class="${this.getPlatformIcon(item.platform)}"></i>
+                                    ${this.getPlatformName(item.platform)}
+                                </div>
+                                <div>${this.formatTimeAgo(item.timestamp)}</div>
+                                <div>${item.reference}</div>
+                            </div>
+                        </div>
+                        <div class="history-actions">
+                            <button class="history-action-btn" onclick="app.historyManager.reshareItem(${item.id})" title="Reshare">
+                                <i class="fas fa-share"></i>
+                            </button>
+                            <button class="history-action-btn" onclick="app.historyManager.copyItem(${item.id})" title="Copy">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            reshareItem(id) {
+                const item = this.history.find(h => h.id === id);
+                if (!item) return;
+
+                const verseData = {
+                    text: item.verse,
+                    reference: item.reference,
+                    translation: 'HISTORY'
+                };
+
+                // Set as current verse and open share modal
+                app.currentVerse = verseData;
+                app.showShareModal();
+            }
+
+            copyItem(id) {
+                const item = this.history.find(h => h.id === id);
+                if (!item) return;
+
+                const text = `"${item.verse}" - ${item.reference}\n\nShared via <span class="app-link" title="https://mashifmj-prog.github.io/VerseCurator/">VerseCurator App</span>`;
+                
+                navigator.clipboard.writeText(text.replace(/<[^>]*>/g, '')).then(() => {
+                    app.showNotification('Verse copied to clipboard!');
+                });
+            }
+
+            clearHistory() {
+                if (this.history.length === 0) return;
+                
+                if (confirm('Are you sure you want to clear your share history? This action cannot be undone.')) {
+                    this.history = [];
+                    this.saveHistory();
+                    this.loadHistory();
+                    app.showNotification('Share history cleared');
+                }
+            }
+
+            saveHistory() {
+                localStorage.setItem('shareHistory', JSON.stringify(this.history));
+            }
+
+            getPlatformIcon(platform) {
+                const icons = {
+                    'whatsapp': 'fab fa-whatsapp',
+                    'email': 'fas fa-envelope',
+                    'sms': 'fas fa-comment-sms',
+                    'device': 'fas fa-mobile-alt',
+                    'copy': 'fas fa-copy',
+                    'image_download': 'fas fa-download',
+                    'image_share': 'fas fa-share-alt',
+                    'facebook': 'fab fa-facebook',
+                    'instagram': 'fab fa-instagram'
+                };
+                return icons[platform] || 'fas fa-share-alt';
+            }
+
+            getPlatformName(platform) {
+                const names = {
+                    'whatsapp': 'WhatsApp',
+                    'email': 'Email',
+                    'sms': 'SMS',
+                    'device': 'Device Share',
+                    'copy': 'Copied',
+                    'image_download': 'Image Download',
+                    'image_share': 'Image Share',
+                    'facebook': 'Facebook',
+                    'instagram': 'Instagram'
+                };
+                return names[platform] || platform;
+            }
+
+            truncateText(text, maxLength) {
+                if (text.length <= maxLength) return text;
+                return text.substring(0, maxLength) + '...';
+            }
+
+            formatTimeAgo(timestamp) {
+                const now = new Date();
+                const time = new Date(timestamp);
+                const diffInSeconds = Math.floor((now - time) / 1000);
+
+                if (diffInSeconds < 60) return 'Just now';
+                if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}m ago`;
+                if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)}h ago`;
+                return `${Math.floor(diffInSeconds / 86400)}d ago`;
+            }
+        }
+
+        // NEW: Broadcast Manager
+        class BroadcastManager {
+            switchTab(tabName) {
+                // Update active tab
+                document.querySelectorAll('.broadcast-tab').forEach(tab => {
+                    tab.classList.toggle('active', tab.dataset.tab === tabName);
+                });
+
+                // Show active content
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.toggle('active', content.id === tabName + 'Tab');
+                });
+            }
+
+            copyVerseForBroadcast() {
+                if (!app.currentVerse) return;
+
+                const verseText = `"${app.currentVerse.text}" - ${app.currentVerse.reference}`;
+                const broadcastText = `${verseText}\n\nShared via VerseCurator - Beautiful Bible verse curation\n👉 https://mashifmj-prog.github.io/VerseCurator/`;
+
+                navigator.clipboard.writeText(broadcastText).then(() => {
+                    app.showNotification('Copied! Ready for WhatsApp broadcast');
+                    // Track this as a share
+                    app.historyManager.addToHistory(app.currentVerse, 'broadcast_copy', true);
+                });
+            }
+        }
+
+        // Rate Button Manager
+        class RateButtonManager {
+            constructor() {
+                this.rateButton = document.getElementById('rateButton');
+                this.ratingModal = document.getElementById('ratingModal');
+                this.selectedRating = 0;
+                
+                this.init();
+            }
+            
+            init() {
+                this.loadStatistics();
+                this.setupEventListeners();
+                this.checkRateButtonVisibility();
+            }
+            
+            loadStatistics() {
+                const stats = JSON.parse(localStorage.getItem('verseCuratorStats') || '{}');
+                this.stats = {
+                    totalViews: stats.totalViews || 0,
+                    streak: stats.streak || 0,
+                    lastVisit: stats.lastVisit || null,
+                    hasRated: stats.hasRated || false,
+                    ...stats
+                };
+            }
+            
+            saveStatistics() {
+                localStorage.setItem('verseCuratorStats', JSON.stringify(this.stats));
+            }
+            
+            setupEventListeners() {
+                // Rate button click
+                this.rateButton.addEventListener('click', () => this.openRatingModal());
+                
+                // Star rating
+                document.querySelectorAll('.rating-star').forEach(star => {
+                    star.addEventListener('click', (e) => this.setRating(parseInt(e.target.dataset.rating)));
+                });
+                
+                // Modal actions
+                document.getElementById('ratingCancel').addEventListener('click', () => this.closeRatingModal());
+                document.getElementById('ratingSubmit').addEventListener('click', () => this.submitRating());
+                
+                // Close modal on background click
+                this.ratingModal.addEventListener('click', (e) => {
+                    if (e.target === this.ratingModal) {
+                        this.closeRatingModal();
+                    }
+                });
+            }
+            
+            checkRateButtonVisibility() {
+                if (this.stats.hasRated) {
+                    this.rateButton.style.display = 'none';
+                    return;
+                }
+                
+                const showRateButton = 
+                    this.stats.totalViews >= 10 || 
+                    this.stats.streak >= 2;
+                    
+                if (showRateButton) {
+                    this.showRateButton();
+                }
+            }
+            
+            showRateButton() {
+                this.rateButton.style.display = 'block';
+                setTimeout(() => {
+                    this.rateButton.classList.add('pulse');
+                }, 1000);
+            }
+            
+            openRatingModal() {
+                this.ratingModal.style.display = 'block';
+                this.selectedRating = 0;
+                this.updateStars();
+            }
+            
+            closeRatingModal() {
+                this.ratingModal.style.display = 'none';
+                document.getElementById('ratingCommentInput').value = '';
+            }
+            
+            setRating(rating) {
+                this.selectedRating = rating;
+                this.updateStars();
+            }
+            
+            updateStars() {
+                document.querySelectorAll('.rating-star').forEach((star, index) => {
+                    if (index < this.selectedRating) {
+                        star.classList.add('active');
+                    } else {
+                        star.classList.remove('active');
+                    }
+                });
+            }
+            
+            submitRating() {
+                if (this.selectedRating === 0) {
+                    alert('Please select a rating before submitting.');
+                    return;
+                }
+                
+                const comment = document.getElementById('ratingCommentInput').value;
+                
+                // Save rating
+                this.stats.hasRated = true;
+                this.stats.userRating = this.selectedRating;
+                this.stats.userComment = comment;
+                this.stats.ratingDate = new Date().toISOString();
+                this.saveStatistics();
+                
+                // Hide rate button
+                this.rateButton.style.display = 'none';
+                
+                // Close modal
+                this.closeRatingModal();
+                
+                // Show thank you message
+                this.showThankYouMessage();
+            }
+            
+            showThankYouMessage() {
+                alert('Thank you for your rating! Your feedback helps us improve VerseCurator.');
+            }
+            
+            // Call this method when verse is viewed
+            trackView() {
+                this.loadStatistics();
+                
+                // Update total views
+                this.stats.totalViews = (this.stats.totalViews || 0) + 1;
+                
+                // Update streak
+                this.updateStreak();
+                
+                this.saveStatistics();
+                this.checkRateButtonVisibility();
+            }
+            
+            updateStreak() {
+                const today = new Date().toDateString();
+                const lastVisit = this.stats.lastVisit ? new Date(this.stats.lastVisit).toDateString() : null;
+                
+                if (lastVisit === today) {
+                    // Already visited today
+                    return;
+                }
+                
+                if (!lastVisit || this.isYesterday(lastVisit)) {
+                    // Consecutive day
+                    this.stats.streak = (this.stats.streak || 0) + 1;
+                } else {
+                    // Streak broken
+                    this.stats.streak = 1;
+                }
+                
+                this.stats.lastVisit = new Date().toISOString();
+            }
+            
+            isYesterday(dateString) {
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
+                return dateString === yesterday.toDateString();
+            }
+        }
+
+        // Image Generator with Enhanced Watermark Support
+        class ImageGenerator {
+            constructor() {
+                this.canvas = document.createElement('canvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.themes = {
+                    classic: {
+                        background: '#ffffff',
+                        textColor: '#333333',
+                        accentColor: '#8B4513',
+                        font: 'Georgia, serif'
+                    },
+                    parchment: {
+                        background: '#f5e8c8',
+                        textColor: '#5c4b37',
+                        accentColor: '#8B4513',
+                        font: 'Georgia, serif'
+                    },
+                    nature: {
+                        background: '#2d5016',
+                        textColor: '#ffffff',
+                        accentColor: '#90EE90',
+                        font: 'Arial, sans-serif'
+                    },
+                    dark: {
+                        background: '#1a1a1a',
+                        textColor: '#ffffff',
+                        accentColor: '#667eea',
+                        font: 'Arial, sans-serif'
+                    },
+                    colorful: {
+                        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                        textColor: '#ffffff',
+                        accentColor: '#ffd700',
+                        font: 'Arial, sans-serif'
+                    },
+                    sunrise: {
+                        background: 'linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%)',
+                        textColor: '#ffffff',
+                        accentColor: '#2d5016',
+                        font: 'Georgia, serif'
+                    }
+                };
+            }
+            
+            async generateImage(verseData, themeName = 'classic', includeWatermark = false) {
+                const theme = this.themes[themeName];
+                const width = 1200;
+                const height = 630;
+                
+                this.canvas.width = width;
+                this.canvas.height = height;
+                
+                // Clear canvas
+                this.ctx.clearRect(0, 0, width, height);
+                
+                // Draw background
+                if (typeof theme.background === 'string' && theme.background.startsWith('linear-gradient')) {
+                    // Create gradient background
+                    const gradient = this.ctx.createLinearGradient(0, 0, width, height);
+                    if (themeName === 'colorful') {
+                        gradient.addColorStop(0, '#667eea');
+                        gradient.addColorStop(1, '#764ba2');
+                    } else if (themeName === 'sunrise') {
+                        gradient.addColorStop(0, '#ff7e5f');
+                        gradient.addColorStop(1, '#feb47b');
+                    }
+                    this.ctx.fillStyle = gradient;
+                } else {
+                    this.ctx.fillStyle = theme.background;
+                }
+                this.ctx.fillRect(0, 0, width, height);
+                
+                // Add some decorative elements based on theme
+                this.addThemeDecorations(themeName, width, height);
+                
+                // Set text styles
+                this.ctx.fillStyle = theme.textColor;
+                this.ctx.font = `bold 48px ${theme.font}`;
+                this.ctx.textAlign = 'center';
+                this.ctx.textBaseline = 'middle';
+                
+                // Draw verse text (wrapped)
+                const maxWidth = width - 100;
+                const verseLines = this.wrapText(verseData.text, maxWidth, this.ctx, 48);
+                const totalHeight = verseLines.length * 60;
+                let startY = (height - totalHeight) / 2;
+                
+                verseLines.forEach((line, index) => {
+                    this.ctx.fillText(line, width / 2, startY + (index * 60));
+                });
+                
+                // Draw reference
+                this.ctx.font = `italic 36px ${theme.font}`;
+                this.ctx.fillStyle = theme.accentColor;
+                this.ctx.fillText(verseData.reference, width / 2, startY + totalHeight + 50);
+                
+                // ENHANCED: Add watermark if needed with different text based on context
+                if (includeWatermark) {
+                    this.ctx.font = `20px ${theme.font}`;
+                    this.ctx.fillStyle = theme.textColor + '80'; // Semi-transparent
+                    const watermarkText = 'Sourced via VerseCurator'; // Different text for downloaded images
+                    this.ctx.fillText(watermarkText, width / 2, height - 30);
+                }
+                
+                return this.canvas.toDataURL('image/png');
+            }
+            
+            wrapText(text, maxWidth, context, fontSize) {
+                const words = text.split(' ');
+                const lines = [];
+                let currentLine = words[0];
+                
+                for (let i = 1; i < words.length; i++) {
+                    const word = words[i];
+                    const width = context.measureText(currentLine + ' ' + word).width;
+                    if (width < maxWidth) {
+                        currentLine += ' ' + word;
+                    } else {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    }
+                }
+                lines.push(currentLine);
+                return lines;
+            }
+            
+            addThemeDecorations(themeName, width, height) {
+                this.ctx.save();
+                
+                switch (themeName) {
+                    case 'classic':
+                        // Simple border
+                        this.ctx.strokeStyle = '#8B4513';
+                        this.ctx.lineWidth = 5;
+                        this.ctx.strokeRect(20, 20, width - 40, height - 40);
+                        break;
+                        
+                    case 'parchment':
+                        // Aged paper effect
+                        this.ctx.fillStyle = '#ffffff20';
+                        for (let i = 0; i < 50; i++) {
+                            const x = Math.random() * width;
+                            const y = Math.random() * height;
+                            const radius = Math.random() * 3;
+                            this.ctx.beginPath();
+                            this.ctx.arc(x, y, radius, 0, Math.PI * 2);
+                            this.ctx.fill();
+                        }
+                        break;
+                        
+                    case 'nature':
+                        // Leaf patterns in corners
+                        this.drawCornerLeaves(width, height);
+                        break;
+                        
+                    case 'dark':
+                        // Star-like dots
+                        this.ctx.fillStyle = '#ffffff40';
+                        for (let i = 0; i < 100; i++) {
+                            const x = Math.random() * width;
+                            const y = Math.random() * height;
+                            const size = Math.random() * 2;
+                            this.ctx.fillRect(x, y, size, size);
+                        }
+                        break;
+                }
+                
+                this.ctx.restore();
+            }
+            
+            drawCornerLeaves(width, height) {
+                const drawLeaf = (x, y, size, angle) => {
+                    this.ctx.save();
+                    this.ctx.translate(x, y);
+                    this.ctx.rotate(angle);
+                    this.ctx.fillStyle = '#90EE90';
+                    this.ctx.beginPath();
+                    this.ctx.ellipse(0, 0, size, size * 0.6, 0, 0, Math.PI * 2);
+                    this.ctx.fill();
+                    this.ctx.restore();
+                };
+                
+                // Draw leaves in corners
+                drawLeaf(100, 100, 20, Math.PI / 4);
+                drawLeaf(width - 100, 100, 20, -Math.PI / 4);
+                drawLeaf(100, height - 100, 20, (3 * Math.PI) / 4);
+                drawLeaf(width - 100, height - 100, 20, (-3 * Math.PI) / 4);
             }
         }
 
