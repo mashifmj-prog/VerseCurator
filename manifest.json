@@ -1,0 +1,25 @@
+{
+  "name": "VerseCurator",
+  "short_name": "VerseCurator",
+  "description": "Curate, share, and inspire with daily Bible verses tailored to the time of day.",
+  "start_url": "/VerseCurator/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#667eea",
+  "scope": "/VerseCurator/",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "lang": "en-US",
+  "orientation": "portrait",
+  "prefer_related_applications": false
+}
